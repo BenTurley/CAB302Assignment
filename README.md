@@ -1,7 +1,8 @@
 # CAB302Assignment
 CAB302 Assignment
 
-##Contributors
-| Name				| Student No.	|
-|-------------------|---------------|
-| Benjamin Turley	| n10203877		|
+## Contributors
+
+| Name           | Student No. |
+| -------------- | ----------- |
+| Benjamin Turley| n10203877   |
