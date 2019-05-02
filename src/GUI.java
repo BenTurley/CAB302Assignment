@@ -4,12 +4,14 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class GUI extends JFrame {
+    private JPanel panel;
+
     public GUI() {
         super("Vector Editing Software");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel panel = new JPanel();
+        panel = new JPanel();
         panel.addMouseListener(new ButtonListener());
 
         this.getContentPane().add(panel);
@@ -52,7 +54,7 @@ public class GUI extends JFrame {
             this.y2 = (e.getY());
             System.out.println("X co-ord: " + x2 + " Y co-ord: " + y2);
 
-            Line line = new Line(x1,y1,x2,y2);
+            Line line = new Line(x1,y1,x2,y2, panel);
 
             System.out.println(line.lineOutputFormatted());
         }
