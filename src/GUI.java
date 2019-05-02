@@ -43,8 +43,8 @@ public class GUI extends JFrame {
             //double y1 = (e.getY());      //!Change to divide based on dimension of window, scaling from 0 - 1
             this.x1 = (e.getX());
             this.y1 = (e.getY());
-            System.out.println("Click!");
-            System.out.println("X co-ord: " + x1 + " Y co-ord: " + y1);
+            //System.out.println("Click!");
+            //System.out.println("X co-ord: " + x1 + " Y co-ord: " + y1);
         }
 
         public void mouseReleased(MouseEvent e) {
@@ -52,11 +52,12 @@ public class GUI extends JFrame {
             //double y2 = (e.getY());      //!Change to divide based on dimension of window, scaling from 0 - 1
             this.x2 = (e.getX());
             this.y2 = (e.getY());
-            System.out.println("X co-ord: " + x2 + " Y co-ord: " + y2);
+            //System.out.println("X co-ord: " + x2 + " Y co-ord: " + y2);
 
             Line line = new Line(x1,y1,x2,y2, panel);
+            line.DrawLine();
 
-            System.out.println(line.lineOutputFormatted());
+            System.out.println(line.LineOutputFormatted());
         }
 
         public void mouseEntered(MouseEvent e) {
