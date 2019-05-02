@@ -9,10 +9,10 @@ public class GUI extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JButton button = new JButton();
-        button.addMouseListener(new ButtonListener());
+        JPanel panel = new JPanel();
+        panel.addMouseListener(new ButtonListener());
 
-        this.getContentPane().add(button);
+        this.getContentPane().add(panel);
 
         //Display window
         this.setPreferredSize(new Dimension(300,300));
