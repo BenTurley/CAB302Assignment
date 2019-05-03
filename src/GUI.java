@@ -69,8 +69,8 @@ public class GUI extends JFrame {
                 //System.out.println("Rectangle");
             }
             else if(buttonString.equals("Line")){
-                //System.out.println("Line");
                 tool = "Line";
+                //System.out.println("Line");
             }
         }
 
@@ -93,8 +93,6 @@ public class GUI extends JFrame {
             //double y2 = (e.getY());      //!Change to divide based on dimension of window, scaling from 0 - 1
             this.x2 = (e.getX());
             this.y2 = (e.getY());
-
-            System.out.println(tool);
 
             //Rectangle rectangle = new Rectangle(x1, y1, x2, y2, panel);
             //rectangle.DrawRectangle();
