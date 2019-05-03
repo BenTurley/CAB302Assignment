@@ -1,9 +1,11 @@
 import javax.swing.*;
+import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
 
 public class GUI extends JFrame {
     private JPanel panel;
@@ -32,6 +34,19 @@ public class GUI extends JFrame {
 
         add(buttonPanel, BorderLayout.WEST);
 
+        //File chooser buttons
+        JButton chooserButton1 = new JButton("Save");
+        JButton chooserButton2 = new JButton("Open");
+        //Create FileChooser object
+        fileChooser vecFileChooser = new fileChooser();
+        //Add action listeners to buttons
+        chooserButton1.addActionListener(vecFileChooser);
+        chooserButton2.addActionListener(vecFileChooser);
+        //Add buttons to frame
+        buttonPanel.add(chooserButton1);
+        buttonPanel.add(chooserButton2);
+
+
         JButton rectangleButton = new JButton("Rectangle");
         rectangleButton.addActionListener(new ButtonListener());
         buttonPanel.add(rectangleButton);
@@ -41,6 +56,13 @@ public class GUI extends JFrame {
         buttonPanel.add(lineButton);
 
         this.getContentPane().add(panel);
+
+        //File chooser
+        /*
+        JFileChooser chooser = new JFileChooser(new File("C:"));
+        chooser.showSaveDialog(null);
+        */
+
 
         //Display window
         this.setPreferredSize(new Dimension(300,300));
@@ -116,6 +138,37 @@ public class GUI extends JFrame {
 
         public void mouseExited(MouseEvent e) {
             //Do nothing
+        }
+    }
+
+    public class fileChooser implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            String command = e.getActionCommand();
+
+            if(command.equals("Save")) {
+                JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+
+                int render = fileChooser.showSaveDialog(null);
+
+                if(render == JFileChooser.APPROVE_OPTION) {
+                    //Set display label to that of path
+                }
+                else {
+                    //Set display label to say user cancelled
+                }
+            }
+            else {
+                JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+
+                int render = fileChooser.showOpenDialog(null);
+
+                if(render == JFileChooser.APPROVE_OPTION) {
+                    //Set display label to that of path
+                }
+                else {
+                    //Set display label to say user cancelled
+                }
+            }
         }
     }
 }
