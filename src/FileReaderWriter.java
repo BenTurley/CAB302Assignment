@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileReaderWriter {
-    
+
     private String actualFilePath;
     private String fileContent;
     public FileReaderWriter(String directory, String fileName, String fileContent){
