@@ -17,12 +17,35 @@ public class Rectangle {
         this.panel = panel;
     }
 
+    private void xSwap(){
+        int temp = (int) this.x2;
+        this.x2 = this.x1;
+        this.x1 = temp;
+    }
+
+    private void ySwap(){
+        int temp = (int) this.y2;
+        this.y2 = this.y1;
+        this.y1 = temp;
+    }
+
     public void DrawRectangle() {
+        int xDiff = (int) Math.abs(x2-x1);
+        int yDiff = (int) Math.abs(y2-y1);
+
+        if((this.x1 > this.x2) && (this.y1< this.y2)){
+            xSwap();
+        }
+        else if((this.x1 < this.x2) && (this.y1 > this.y2)){
+            ySwap();
+        }
+        else if((this.x1 > this.x2) && (this.y1 > this.y2)){
+            ySwap();
+            xSwap();
+        }
+
         Graphics g = panel.getGraphics();
-        g.drawLine((int) x1,(int)y1,(int)x2,(int)y1);
-        g.drawLine((int) x2,(int)y1,(int)x2,(int)y2);
-        g.drawLine((int) x2,(int)y2,(int)x1,(int)y2);
-        g.drawLine((int) x1,(int)y2,(int)x1,(int)y1);
+        g.drawRect((int) x1,(int)y1,xDiff,yDiff);
     }
 
     public String RectangleOutputFormatted() {
