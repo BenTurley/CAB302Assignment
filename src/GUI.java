@@ -88,7 +88,7 @@ public class GUI extends JFrame {
         }
 
         public void mouseReleased(MouseEvent e) {
-            System.out.println(tool);
+            //System.out.println(tool);
             //double x2 = (e.getX());      //!Change to divide based on dimension of window, scaling from 0 - 1
             //double y2 = (e.getY());      //!Change to divide based on dimension of window, scaling from 0 - 1
             this.x2 = (e.getX());
