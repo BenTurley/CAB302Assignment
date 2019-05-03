@@ -69,8 +69,8 @@ public class GUI extends JFrame {
                 //System.out.println("Rectangle");
             }
             else if(buttonString.equals("Line")){
-                System.out.println("Line");
-                //tool = "Line";
+                //System.out.println("Line");
+                tool = "Line";
             }
         }
 
