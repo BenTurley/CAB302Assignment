@@ -1,36 +1,68 @@
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class FileReaderWriter {
-
     private String actualFilePath;
     private String fileContent;
-    public FileReaderWriter(String directory, String fileName, String fileContent){
+    public FileReaderWriter(String directory, String fileName){
 
         this.actualFilePath = directory + File.separator + fileName;
-        this.fileContent = fileContent;
+
     }
 
-    public void WriteFile() {
+    /**
+     * Writes to file based on object private variables
+     */
+    public void WriteFile(String fileContent) {
         try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(actualFilePath))) {
-            //String fileContent = "Test text test text.";
-            bufferedWriter.write(this.fileContent);
+            this.fileContent = fileContent;
+            bufferedWriter.write(fileContent);
         }
         catch (IOException e) {
-            System.out.println("An error occurred in WriteFile");
+            System.out.println("IOException in WriteFile");
         }
     }
 
+    /**
+     * Prints outputted file directory
+     */
     public void PrintOutputLocation() {
-        System.out.println("File was output to: " + System.getProperty("user.home"));
+        System.out.println("File was output to: " + this.actualFilePath);
+    }
+
+
+    /**
+     * Prints string written to file to the console
+     */
+    public void PrintOutputString() {
+        System.out.println("Outputted file contents: " + this.fileContent);
+    }
+
+    public void ReadFile() {
+        try(BufferedReader bufferedReader = new BufferedReader(new FileReader(actualFilePath))) {
+            String line = bufferedReader.readLine();
+            while(line!=null) {
+                System.out.println(line);
+                line = bufferedReader.readLine();
+            }
+        }
+        catch(FileNotFoundException e) {
+            System.out.println("File was not found.");
+        }
+        catch(IOException e) {
+            System.out.println("IOException in ReadFile");
+        }
     }
 
     public static void main(String[] args) {
-        FileReaderWriter test = new FileReaderWriter((System.getProperty("user.home")), "test.txt", "This is a test string");
-        test.WriteFile();
+        //Writer test
+        FileReaderWriter test = new FileReaderWriter((System.getProperty("user.home")), "test.txt");
+        test.WriteFile("This is a test string");
         test.PrintOutputLocation();
+        test.PrintOutputString();
+        System.out.println("---");
+        //Reader test
+        FileReaderWriter test2 = new FileReaderWriter((System.getProperty("user.home")), "test.txt");
+        test2.ReadFile();
     }
 }
 
