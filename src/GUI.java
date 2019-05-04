@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -148,6 +149,11 @@ public class GUI extends JFrame {
             if(command.equals("Save")) {
                 JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 
+                fileChooser.setAcceptAllFileFilterUsed(false);
+                fileChooser.setDialogTitle("Select a .vec or .txt file");
+                FileNameExtensionFilter restrict = new FileNameExtensionFilter("Only .vec & .txt files", "vec", "txt");
+                fileChooser.addChoosableFileFilter(restrict);
+
                 int render = fileChooser.showSaveDialog(null);
 
                 if(render == JFileChooser.APPROVE_OPTION) {
@@ -159,6 +165,11 @@ public class GUI extends JFrame {
             }
             else {
                 JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+
+                fileChooser.setAcceptAllFileFilterUsed(false);
+                fileChooser.setDialogTitle("Select a .vec or .txt file");
+                FileNameExtensionFilter restrict = new FileNameExtensionFilter("Only .vec & .txt files", "vec", "txt");
+                fileChooser.addChoosableFileFilter(restrict);
 
                 int render = fileChooser.showOpenDialog(null);
 
