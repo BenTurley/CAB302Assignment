@@ -154,10 +154,10 @@ public class GUI extends JFrame {
                 FileNameExtensionFilter restrict = new FileNameExtensionFilter("Only .vec & .txt files", "vec", "txt");
                 fileChooser.addChoosableFileFilter(restrict);
 
-                int render = fileChooser.showSaveDialog(null);
+                int choice = fileChooser.showSaveDialog(null);
 
-                if(render == JFileChooser.APPROVE_OPTION) {
-                    //Set display label to that of path
+                if(choice == JFileChooser.APPROVE_OPTION) {
+                    System.out.println(fileChooser.getSelectedFile().getAbsolutePath());
                 }
                 else {
                     //Set display label to say user cancelled
@@ -171,10 +171,15 @@ public class GUI extends JFrame {
                 FileNameExtensionFilter restrict = new FileNameExtensionFilter("Only .vec & .txt files", "vec", "txt");
                 fileChooser.addChoosableFileFilter(restrict);
 
-                int render = fileChooser.showOpenDialog(null);
+                int choice = fileChooser.showOpenDialog(null);
 
-                if(render == JFileChooser.APPROVE_OPTION) {
-                    //Set display label to that of path
+                if(choice == JFileChooser.APPROVE_OPTION) {
+                    System.out.println("Opened: " + fileChooser.getSelectedFile().getAbsolutePath());
+
+                    //!NOTE: This is poorly written, rewrite once FileReaderWriter has been restructured
+                    FileReaderWriter openedFile = new FileReaderWriter(fileChooser.getSelectedFile().getAbsolutePath(), "");
+                    openedFile.ReadFile();
+                    //!
                 }
                 else {
                     //Set display label to say user cancelled
