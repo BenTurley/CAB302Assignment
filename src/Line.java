@@ -22,6 +22,7 @@ public class Line {
     public void DrawLine() {
         Graphics g = panel.getGraphics();
         g.drawLine((int) x1,(int)y1,(int)x2,(int)y2);
+
     }
 
     public String LineOutputFormatted() {

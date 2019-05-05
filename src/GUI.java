@@ -132,6 +132,8 @@ public class GUI extends JFrame {
                 Line line = new Line(this.x1, this.y1, this.x2, this.y2, panel);
                 line.DrawLine();
                 System.out.println(line.LineOutputFormatted());
+
+
             }
             //System.out.println("X co-ord: " + x2 + " Y co-ord: " + y2);
         }
@@ -199,15 +201,19 @@ public class GUI extends JFrame {
                             double outx1 = Double.valueOf(matcher.group(2));
                             System.out.println(outx1);
                             System.out.println("y1: " + matcher.group(3));
-                            double outy1 = Double.valueOf(matcher.group(2));
+                            double outy1 = Double.valueOf(matcher.group(3));
                             System.out.println(outy1);
                             System.out.println("x2: " + matcher.group(4));
-                            double outx2 = Double.valueOf(matcher.group(2));
+                            double outx2 = Double.valueOf(matcher.group(4));
                             System.out.println(outx2);
                             System.out.println("y2: " + matcher.group(5));
-                            double outy2 = Double.valueOf(matcher.group(2));
+                            double outy2 = Double.valueOf(matcher.group(5));
                             System.out.println(outy2);
                             //Move output variables back into GUI class to draw to panel
+                            Line fileLine = new Line(outx1, outy1, outx2, outy2, panel);
+                            fileLine.DrawLine();
+                            System.out.println(fileLine.LineOutputFormatted());
+                            System.out.println(fileLine);
                         }
                         //#
                     }
