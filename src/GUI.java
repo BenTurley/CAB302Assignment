@@ -7,6 +7,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class GUI extends JFrame {
     private JPanel panel;
@@ -176,9 +179,47 @@ public class GUI extends JFrame {
                 if(choice == JFileChooser.APPROVE_OPTION) {
                     System.out.println("Opened: " + fileChooser.getSelectedFile().getAbsolutePath());
 
+                    //#Regular expressions
+                    String regex = "(LINE |RECTANGLE )([0-9.]+) ([0-9.]+) ([0-9.]+) ([0-9.]+)";
+                    Pattern pattern = Pattern.compile(regex);
+                    //#
+
                     //!NOTE: This is poorly written, rewrite once FileReaderWriter has been restructured
                     FileReaderWriter openedFile = new FileReaderWriter(fileChooser.getSelectedFile().getAbsolutePath(), "");
-                    openedFile.ReadFile();
+                    ArrayList fileContents = openedFile.ReadFile();
+                    System.out.println(fileContents);
+                    for(int x = 0; x < fileContents.size(); x++ ){
+                        String str = fileContents.get(x).toString();
+                        System.out.println(str);
+                        //#Regular expressions
+                        Matcher matcher = pattern.matcher(str);
+                        if(matcher.find()) {
+                            System.out.println("Type: " + matcher.group(1));
+                            System.out.println("x1: " + matcher.group(2));
+                            double outx1 = Double.valueOf(matcher.group(2));
+                            System.out.println(outx1);
+                            System.out.println("y1: " + matcher.group(3));
+                            double outy1 = Double.valueOf(matcher.group(2));
+                            System.out.println(outy1);
+                            System.out.println("x2: " + matcher.group(4));
+                            double outx2 = Double.valueOf(matcher.group(2));
+                            System.out.println(outx2);
+                            System.out.println("y2: " + matcher.group(5));
+                            double outy2 = Double.valueOf(matcher.group(2));
+                            System.out.println(outy2);
+                            //Move output variables back into GUI class to draw to panel
+                        }
+                        //#
+                    }
+
+
+
+
+
+                    /*
+                    Line line = new Line(this.x1, this.y1, this.x2, this.y2, panel);
+                    line.DrawLine();
+                     */
                     //!
                 }
                 else {

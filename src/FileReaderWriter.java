@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.ArrayList;
 
 public class FileReaderWriter {
     private String actualFilePath;
@@ -37,13 +38,17 @@ public class FileReaderWriter {
         System.out.println("Outputted file contents: " + this.fileContent);
     }
 
-    public void ReadFile() {
+    public ArrayList<String> ReadFile() {
+        ArrayList<String> output = new ArrayList<>();
         try(BufferedReader bufferedReader = new BufferedReader(new FileReader(actualFilePath))) {
             String line = bufferedReader.readLine();
+
             while(line!=null) {
-                System.out.println(line);
+                //System.out.println(line);
+                output.add(line);
                 line = bufferedReader.readLine();
             }
+
         }
         catch(FileNotFoundException e) {
             System.out.println("File was not found.");
@@ -51,6 +56,7 @@ public class FileReaderWriter {
         catch(IOException e) {
             System.out.println("IOException in ReadFile");
         }
+        return output;
     }
 
     public static void main(String[] args) {
