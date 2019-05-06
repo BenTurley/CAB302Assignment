@@ -17,10 +17,13 @@ public class GUI extends JFrame {
     private JPanel drawingPanel;
     private String tool;
 
+    public ArrayList<String> drawnShapes = new ArrayList<>();
+
     public GUI() {
         super("Vector Editing Software");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
 
         panel = new JPanel();
@@ -87,6 +90,8 @@ public class GUI extends JFrame {
         private double x2;
         private double y2;
 
+
+
         public void actionPerformed(ActionEvent f){
             String buttonString = f.getActionCommand();
 
@@ -132,7 +137,9 @@ public class GUI extends JFrame {
                 Line line = new Line(this.x1, this.y1, this.x2, this.y2, panel);
                 line.DrawLine();
                 System.out.println(line.LineOutputFormatted());
-
+                //Add line to array of objects
+                drawnShapes.add(line.LineOutputFormatted());
+                System.out.println(drawnShapes);
 
             }
             //System.out.println("X co-ord: " + x2 + " Y co-ord: " + y2);
