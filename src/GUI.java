@@ -162,14 +162,25 @@ public class GUI extends JFrame {
                 JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 
                 fileChooser.setAcceptAllFileFilterUsed(false);
-                fileChooser.setDialogTitle("Select a .vec or .txt file");
-                FileNameExtensionFilter restrict = new FileNameExtensionFilter("Only .vec & .txt files", "vec", "txt");
+                fileChooser.setDialogTitle("Select a .vec file");
+                FileNameExtensionFilter restrict = new FileNameExtensionFilter(".vec", "vec");
                 fileChooser.addChoosableFileFilter(restrict);
 
                 int choice = fileChooser.showSaveDialog(null);
 
                 if(choice == JFileChooser.APPROVE_OPTION) {
                     System.out.println(fileChooser.getSelectedFile().getAbsolutePath());
+                    FileReaderWriter saveFile = new FileReaderWriter(fileChooser.getSelectedFile().getAbsolutePath(), "");
+
+                    //Generate file contents
+                    String saveFileContents = "";
+                    for(int x = 0; x < drawnShapes.size(); x++) {
+                        saveFileContents += drawnShapes.get(x) + "\n";
+                    }
+                    System.out.println(saveFileContents);
+
+                    //Write to file
+                    saveFile.WriteFile(saveFileContents);
                 }
                 else {
                     //Set display label to say user cancelled
@@ -179,8 +190,8 @@ public class GUI extends JFrame {
                 JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
 
                 fileChooser.setAcceptAllFileFilterUsed(false);
-                fileChooser.setDialogTitle("Select a .vec or .txt file");
-                FileNameExtensionFilter restrict = new FileNameExtensionFilter("Only .vec & .txt files", "vec", "txt");
+                fileChooser.setDialogTitle("Select a .vec file");
+                FileNameExtensionFilter restrict = new FileNameExtensionFilter(".vec", "vec");
                 fileChooser.addChoosableFileFilter(restrict);
 
                 int choice = fileChooser.showOpenDialog(null);
@@ -221,6 +232,7 @@ public class GUI extends JFrame {
                             fileLine.DrawLine();
                             System.out.println(fileLine.LineOutputFormatted());
                             System.out.println(fileLine);
+                            drawnShapes.add(fileLine.LineOutputFormatted());
                         }
                         //#
                     }
