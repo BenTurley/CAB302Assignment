@@ -132,6 +132,8 @@ public class GUI extends JFrame {
                 Rectangle rectangle = new Rectangle(this.x1, this.y1, this.x2, this.y2, panel);
                 rectangle.DrawRectangle();
                 System.out.println(rectangle.RectangleOutputFormatted());
+                drawnShapes.add(rectangle.RectangleOutputFormatted());
+                System.out.println(drawnShapes);
             }
             else if(tool == "Line"){
                 Line line = new Line(this.x1, this.y1, this.x2, this.y2, panel);
@@ -215,6 +217,7 @@ public class GUI extends JFrame {
                         Matcher matcher = pattern.matcher(str);
                         if(matcher.find()) {
                             System.out.println("Type: " + matcher.group(1));
+                            System.out.println(matcher.group(1));
                             System.out.println("x1: " + matcher.group(2));
                             double outx1 = Double.valueOf(matcher.group(2));
                             System.out.println(outx1);
@@ -227,12 +230,26 @@ public class GUI extends JFrame {
                             System.out.println("y2: " + matcher.group(5));
                             double outy2 = Double.valueOf(matcher.group(5));
                             System.out.println(outy2);
-                            //Move output variables back into GUI class to draw to panel
-                            Line fileLine = new Line(outx1, outy1, outx2, outy2, panel);
-                            fileLine.DrawLine();
-                            System.out.println(fileLine.LineOutputFormatted());
-                            System.out.println(fileLine);
-                            drawnShapes.add(fileLine.LineOutputFormatted());
+
+                            //If LINE
+                            if(matcher.group(1).equals("LINE ")) {
+                                System.out.println("Detected LINE");
+                                Line fileLine = new Line(outx1, outy1, outx2, outy2, panel);
+                                fileLine.DrawLine();
+                                System.out.println(fileLine.LineOutputFormatted());
+                                System.out.println(fileLine);
+                                drawnShapes.add(fileLine.LineOutputFormatted());
+                            }
+
+                            //Else if RECTANGLE
+                            else if(matcher.group(1).equals("RECTANGLE ")) {
+                                System.out.println("Detected RECTANGLE");
+                                Rectangle fileRectangle = new Rectangle(outx1, outy1, outx2, outy2, panel);
+                                fileRectangle.DrawRectangle();
+                                System.out.println(fileRectangle.RectangleOutputFormatted());
+                                System.out.println(fileRectangle);
+                                drawnShapes.add(fileRectangle.RectangleOutputFormatted());
+                            }
                         }
                         //#
                     }
