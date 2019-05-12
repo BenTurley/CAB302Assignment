@@ -58,9 +58,11 @@ public class GUI extends JFrame {
         rectangleButton.addActionListener(new ButtonListener());
         buttonPanel.add(rectangleButton);
 
+
         JButton lineButton = new JButton("Line");
         lineButton.addActionListener(new ButtonListener());
         buttonPanel.add(lineButton);
+
 
         this.getContentPane().add(panel);
 
@@ -129,18 +131,37 @@ public class GUI extends JFrame {
             //rectangle.DrawRectangle();
 
             if(tool == "Rectangle") {
+                /* Non-vector
                 Rectangle rectangle = new Rectangle(this.x1, this.y1, this.x2, this.y2, panel);
                 rectangle.DrawRectangle();
                 System.out.println(rectangle.RectangleOutputFormatted());
                 drawnShapes.add(rectangle.RectangleOutputFormatted());
                 System.out.println(drawnShapes);
+                 */
+
+                /* Vector */
+                RectangleVector rectangle = new RectangleVector(this.x1, this.y1, this.x2, this.y2, panel);
+                rectangle.DrawVector();
+                System.out.println(rectangle.VectorOutputFormatted());
+                drawnShapes.add(rectangle.VectorOutputFormatted());
+                System.out.println(drawnShapes);
             }
             else if(tool == "Line"){
+
+                /* Non-vector
                 Line line = new Line(this.x1, this.y1, this.x2, this.y2, panel);
                 line.DrawLine();
                 System.out.println(line.LineOutputFormatted());
                 //Add line to array of objects
                 drawnShapes.add(line.LineOutputFormatted());
+                System.out.println(drawnShapes);
+                 */
+
+                /* Vector */
+                LineVector line  = new LineVector(this.x1, this.y1, this.x2, this.y2, panel);
+                line.DrawVector();
+                System.out.println(line.VectorOutputFormatted());
+                drawnShapes.add(line.VectorOutputFormatted());
                 System.out.println(drawnShapes);
 
             }
