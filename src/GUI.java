@@ -63,14 +63,11 @@ public class GUI extends JFrame {
         lineButton.addActionListener(new ButtonListener());
         buttonPanel.add(lineButton);
 
+        JButton newButton = new JButton("New");
+        newButton.addActionListener(new ButtonListener());
+        buttonPanel.add(newButton);
 
         this.getContentPane().add(panel);
-
-        //File chooser
-        /*
-        JFileChooser chooser = new JFileChooser(new File("C:"));
-        chooser.showSaveDialog(null);
-        */
 
 
         //Display window
@@ -104,6 +101,10 @@ public class GUI extends JFrame {
             else if(buttonString.equals("Line")){
                 tool = "Line";
                 //System.out.println("Line");
+            }
+            else if(buttonString.equals("New")) {
+                drawnShapes.clear();
+                System.out.println(drawnShapes);
             }
         }
 
@@ -140,7 +141,7 @@ public class GUI extends JFrame {
                  */
 
                 /* Vector */
-                RectangleVector rectangle = new RectangleVector(this.x1, this.y1, this.x2, this.y2, panel);
+                RectangleVector rectangle = new RectangleVector(this.x1, this.y1, this.x2, this.y2, drawingPanel);
                 rectangle.DrawVector();
                 System.out.println(rectangle.VectorOutputFormatted());
                 drawnShapes.add(rectangle.VectorOutputFormatted());
@@ -158,7 +159,7 @@ public class GUI extends JFrame {
                  */
 
                 /* Vector */
-                LineVector line  = new LineVector(this.x1, this.y1, this.x2, this.y2, panel);
+                LineVector line  = new LineVector(this.x1, this.y1, this.x2, this.y2, drawingPanel);
                 line.DrawVector();
                 System.out.println(line.VectorOutputFormatted());
                 drawnShapes.add(line.VectorOutputFormatted());
