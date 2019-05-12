@@ -39,16 +39,18 @@ public class RectangleVector implements Vector {
         int xDiff = (int) Math.abs(x2-x1);
         int yDiff = (int) Math.abs(y2-y1);
 
-        if((this.x1 > this.x2) && (this.y1< this.y2)){
+        if((this.x1 > this.x2) && (this.y1 <= this.y2)){
             xSwap();
         }
-        else if((this.x1 < this.x2) && (this.y1 > this.y2)){
+
+        else if((this.x1 <= this.x2) && (this.y1 > this.y2)){
             ySwap();
         }
         else if((this.x1 > this.x2) && (this.y1 > this.y2)){
             ySwap();
             xSwap();
         }
+
 
         Graphics g = panel.getGraphics();
         g.drawRect((int) x1,(int)y1,xDiff,yDiff);
