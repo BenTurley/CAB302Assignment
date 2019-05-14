@@ -6,15 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class GUI extends JFrame {
-    private JFrame frame;
-    private JPanel panel;
-    private JPanel buttonPanel;
     private JPanel drawingPanel;
     private String tool;
 
@@ -25,70 +21,47 @@ public class GUI extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        frame = new JFrame("Vector Editing Software");
-
-        panel = new JPanel();
-        panel.addMouseListener(new ButtonListener());
-        panel.setLayout(new GridLayout(1, 3));
-
-
+        //New drawing panel
         drawingPanel = new JPanel();
         drawingPanel.setBackground(Color.LIGHT_GRAY);
-        panel.add(drawingPanel);
-
-        buttonPanel = new JPanel(new GridLayout(5, 0));
-        buttonPanel.setBackground(Color.GRAY);
-        panel.add(buttonPanel);
-
-        add(buttonPanel, BorderLayout.WEST);
-
-        //File chooser buttons
-        JButton chooserButton1 = new JButton("Save");
-        JButton chooserButton2 = new JButton("Open");
-        //Create FileChooser object
-        fileChooser vecFileChooser = new fileChooser();
-        //Add action listeners to buttons
-        chooserButton1.addActionListener(vecFileChooser);
-        chooserButton2.addActionListener(vecFileChooser);
-        //Add buttons to frame
-        buttonPanel.add(chooserButton1);
-        buttonPanel.add(chooserButton2);
-
-
-        JButton rectangleButton = new JButton("Rectangle");
-        rectangleButton.addActionListener(new ButtonListener());
-        buttonPanel.add(rectangleButton);
-
-
-        JButton lineButton = new JButton("Line");
-        lineButton.addActionListener(new ButtonListener());
-        buttonPanel.add(lineButton);
-
-        JButton newButton = new JButton("New");
-        newButton.addActionListener(new ButtonListener());
-        buttonPanel.add(newButton);
-
-        this.getContentPane().add(panel);
+        drawingPanel.addMouseListener(new ButtonListener());
+        this.add(drawingPanel);
 
         //Create menu bar
         JMenuBar menuBar = new JMenuBar();
-        //Create menu
-        JMenu menu = new JMenu("File");
-        //Create menu items
+        //Create file menu
+        JMenu fileMenu = new JMenu("File");
+        //Create file menu items
         JMenuItem newItem = new JMenuItem("New");
         JMenuItem openItem = new JMenuItem("Open");
         JMenuItem saveItem = new JMenuItem("Save");
-        //Add menu items to menu
-        menu.add(newItem);
-        menu.add(openItem);
-        menu.add(saveItem);
-        //Add menu to menu bar
-        menuBar.add(menu);
+        //Add functionality to menu items
+        fileChooser vecFileChooser = new fileChooser();
+        //Add action listeners to buttons
+        openItem.addActionListener(vecFileChooser);
+        saveItem.addActionListener(vecFileChooser);
 
-        frame.setJMenuBar(menuBar);
-        frame.setSize(400,400);
-        frame.setVisible(true);
-
+        //Add file menu items to menu
+        fileMenu.add(newItem);
+        fileMenu.add(openItem);
+        fileMenu.add(saveItem);
+        //Add file menu to menu bar
+        menuBar.add(fileMenu);
+        //Create tool menu
+        JMenu toolMenu = new JMenu("Tools");
+        //Create tool menu items
+        JMenuItem lineItem = new JMenuItem("Line");
+        JMenuItem rectangleItem = new JMenuItem("Rectangle");
+        //Add functionality to tools
+        lineItem.addActionListener(new ButtonListener());
+        rectangleItem.addActionListener(new ButtonListener());
+        //Add tool menu items to menu
+        toolMenu.add(lineItem);
+        toolMenu.add(rectangleItem);
+        //Add tool menu to menu bar
+        menuBar.add(toolMenu);
+        
+        this.setJMenuBar(menuBar);
 
         //Display window
         this.setPreferredSize(new Dimension(300,300));
@@ -276,7 +249,7 @@ public class GUI extends JFrame {
                             //If LINE
                             if(matcher.group(1).equals("LINE ")) {
                                 System.out.println("Detected LINE");
-                                Line fileLine = new Line(outx1, outy1, outx2, outy2, panel);
+                                Line fileLine = new Line(outx1, outy1, outx2, outy2, drawingPanel);
                                 fileLine.DrawLine();
                                 System.out.println(fileLine.LineOutputFormatted());
                                 System.out.println(fileLine);
@@ -286,7 +259,7 @@ public class GUI extends JFrame {
                             //Else if RECTANGLE
                             else if(matcher.group(1).equals("RECTANGLE ")) {
                                 System.out.println("Detected RECTANGLE");
-                                Rectangle fileRectangle = new Rectangle(outx1, outy1, outx2, outy2, panel);
+                                Rectangle fileRectangle = new Rectangle(outx1, outy1, outx2, outy2, drawingPanel);
                                 fileRectangle.DrawRectangle();
                                 System.out.println(fileRectangle.RectangleOutputFormatted());
                                 System.out.println(fileRectangle);
