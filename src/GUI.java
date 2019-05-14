@@ -12,6 +12,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class GUI extends JFrame {
+    private JFrame frame;
     private JPanel panel;
     private JPanel buttonPanel;
     private JPanel drawingPanel;
@@ -24,7 +25,7 @@ public class GUI extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-
+        frame = new JFrame("Vector Editing Software");
 
         panel = new JPanel();
         panel.addMouseListener(new ButtonListener());
@@ -68,6 +69,25 @@ public class GUI extends JFrame {
         buttonPanel.add(newButton);
 
         this.getContentPane().add(panel);
+
+        //Create menu bar
+        JMenuBar menuBar = new JMenuBar();
+        //Create menu
+        JMenu menu = new JMenu("File");
+        //Create menu items
+        JMenuItem newItem = new JMenuItem("New");
+        JMenuItem openItem = new JMenuItem("Open");
+        JMenuItem saveItem = new JMenuItem("Save");
+        //Add menu items to menu
+        menu.add(newItem);
+        menu.add(openItem);
+        menu.add(saveItem);
+        //Add menu to menu bar
+        menuBar.add(menu);
+
+        frame.setJMenuBar(menuBar);
+        frame.setSize(400,400);
+        frame.setVisible(true);
 
 
         //Display window
