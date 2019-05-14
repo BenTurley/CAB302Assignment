@@ -38,6 +38,7 @@ public class GUI extends JFrame {
         //Add functionality to menu items
         fileChooser vecFileChooser = new fileChooser();
         //Add action listeners to buttons
+        newItem.addActionListener(new ButtonListener());
         openItem.addActionListener(vecFileChooser);
         saveItem.addActionListener(vecFileChooser);
 
@@ -60,7 +61,7 @@ public class GUI extends JFrame {
         toolMenu.add(rectangleItem);
         //Add tool menu to menu bar
         menuBar.add(toolMenu);
-        
+
         this.setJMenuBar(menuBar);
 
         //Display window
