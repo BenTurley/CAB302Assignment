@@ -99,6 +99,9 @@ public class GUI extends JFrame {
             else if(buttonString.equals("New")) {
                 drawnShapes.clear();
                 System.out.println(drawnShapes);
+                //Testing purposes
+                System.out.println(drawingPanel.getSize());
+                //
             }
         }
 
