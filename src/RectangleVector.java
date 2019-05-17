@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.text.DecimalFormat;
 
 public class RectangleVector implements Vector {
     private double x1;
@@ -58,6 +59,31 @@ public class RectangleVector implements Vector {
 
     @Override
     public String VectorOutputFormatted() {
-        return "RECTANGLE " + x1 + " " + y1 + " " + x2 + " " + y2;
+        /* Make a class to handle this*/
+        double panelHeight = panel.getSize().height;
+        double panelWidth = panel.getSize().width;
+
+        DecimalFormat df = new DecimalFormat("0.00");
+
+        double convertedX1 = (x1/panelWidth);
+        double convertedY1 = (y1/panelHeight);
+        double convertedX2 = (x2/panelWidth);
+        double convertedY2 = (y2/panelHeight);
+
+        String formattedX1 = df.format(convertedX1);
+        String formattedY1 = df.format(convertedY1);
+        String formattedX2 = df.format(convertedX2);
+        String formattedY2 = df.format(convertedY2);
+
+        System.out.println(convertedX1);
+        System.out.println(convertedY1);
+        System.out.println(convertedX2);
+        System.out.println(convertedY2);
+
+        System.out.println(formattedX1);
+        System.out.println(formattedY1);
+        System.out.println(formattedX2);
+        System.out.println(formattedY2);
+        return "RECTANGLE " + formattedX1 + " " + formattedY1 + " " + formattedX2 + " " + formattedY2;
     }
 }
