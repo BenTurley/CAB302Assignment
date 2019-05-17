@@ -15,15 +15,6 @@ public class RedrawVectors {
         this.drawingPanel = drawingPanel;
     }
 
-    private void VectorShapeScale(double x1, double y1, double x2, double y2){
-        double panelHeight = drawingPanel.getSize().height;
-        double panelWidth = drawingPanel.getSize().width;
-        VectorCords.add(0, x1 * panelWidth);
-        VectorCords.add(1, y1 * panelHeight);
-        VectorCords.add(2, x2 * panelWidth);
-        VectorCords.add(3, y2 * panelHeight);
-    }
-
     public void redraw() {
         int panelHeight = drawingPanel.getSize().height;
         int panelWidth = drawingPanel.getSize().width;
