@@ -23,9 +23,10 @@ public class GUI extends JFrame {
 
         //New drawing panel
         drawingPanel = new JPanel();
-        drawingPanel.setBackground(Color.LIGHT_GRAY);
+        //drawingPanel.setBackground(Color.LIGHT_GRAY);
         drawingPanel.addMouseListener(new ButtonListener());
         this.add(drawingPanel);
+
 
         //Create menu bar
         JMenuBar menuBar = new JMenuBar();
@@ -112,6 +113,8 @@ public class GUI extends JFrame {
         public void mousePressed(MouseEvent e) {
             //double x1 = (e.getX());      //!Change to divide based on dimension of window, scaling from 0 - 1
             //double y1 = (e.getY());      //!Change to divide based on dimension of window, scaling from 0 - 1
+            RedrawVectors redrawPanel = new RedrawVectors(drawnShapes, drawingPanel);
+            redrawPanel.redraw();
             this.x1 = (e.getX());
             this.y1 = (e.getY());
             //System.out.println("Click!");
