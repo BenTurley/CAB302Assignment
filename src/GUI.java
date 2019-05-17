@@ -138,7 +138,7 @@ public class GUI extends JFrame {
                  */
 
                 /* Vector */
-                RectangleVector rectangle = new RectangleVector(this.x1, this.y1, this.x2, this.y2, drawingPanel);
+                Vector rectangle = new RectangleVector(this.x1, this.y1, this.x2, this.y2, drawingPanel);
                 rectangle.DrawVector();
                 System.out.println(rectangle.VectorOutputFormatted());
                 drawnShapes.add(rectangle.VectorOutputFormatted());
@@ -156,7 +156,7 @@ public class GUI extends JFrame {
                  */
 
                 /* Vector */
-                LineVector line  = new LineVector(this.x1, this.y1, this.x2, this.y2, drawingPanel);
+                Vector line  = new LineVector(this.x1, this.y1, this.x2, this.y2, drawingPanel);
                 line.DrawVector();
                 System.out.println(line.VectorOutputFormatted());
                 drawnShapes.add(line.VectorOutputFormatted());
