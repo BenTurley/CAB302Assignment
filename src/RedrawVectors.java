@@ -53,12 +53,21 @@ public class RedrawVectors {
 
                 if(matcher.group(1).equals("LINE ")) {
                     System.out.println("Detected LINE");
-                    VectorShapeScale(outx1, outy1, outx2, outy2);
-                    Vector line = new LineVector(VectorCords.get(0), VectorCords.get(1), VectorCords.get(2), VectorCords.get(3), drawingPanel);
+                    VectorScale lineScale = new VectorScale(outx1, outy1, outx2, outy2, drawingPanel);
+                    Vector line = new LineVector(lineScale.x1(),lineScale.y1(), lineScale.x2(), lineScale.y2(), drawingPanel);
                     line.DrawVector();
                     System.out.println(line.VectorOutputFormatted());
                     System.out.println(line);
                     //drawnShapes.add(fileLine.LineOutputFormatted());
+                }
+                else if(matcher.group(1).equals("RECTANGLE ")) {
+                    System.out.println("Detected RECTANGLE");
+                    VectorScale rectangleScale = new VectorScale(outx1, outy1, outx2, outy2, drawingPanel);
+                    Vector fileRectangle = new RectangleVector(rectangleScale.x1(), rectangleScale.y1(), rectangleScale.x2(),  rectangleScale.y2(), drawingPanel);
+                    fileRectangle.DrawVector();
+                    System.out.println(fileRectangle.VectorOutputFormatted());
+                    System.out.println(fileRectangle);
+                    //drawnShapes.add(fileRectangle.RectangleOutputFormatted());
                 }
             }
 
