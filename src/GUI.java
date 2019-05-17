@@ -255,12 +255,19 @@ public class GUI extends JFrame {
 
                             //If LINE
                             if(matcher.group(1).equals("LINE ")) {
-                                System.out.println("Detected LINE");
+/*                                System.out.println("Detected LINE");
                                 Line fileLine = new Line(outx1, outy1, outx2, outy2, drawingPanel);
                                 fileLine.DrawLine();
                                 System.out.println(fileLine.LineOutputFormatted());
                                 System.out.println(fileLine);
-                                drawnShapes.add(fileLine.LineOutputFormatted());
+                                drawnShapes.add(fileLine.LineOutputFormatted());*/
+                                VectorScale lineScale = new VectorScale(outx1, outy1, outx2, outy2, drawingPanel);
+                                System.out.println("Detected LINE");
+                                Vector fileLine = new LineVector(lineScale.x1(), lineScale.y1(), lineScale.x2(), lineScale.y2(), drawingPanel);
+                                fileLine.DrawVector();
+                                System.out.println(fileLine.VectorOutputFormatted());
+                                System.out.println(fileLine);
+                                drawnShapes.add(fileLine.VectorOutputFormatted());
                             }
 
                             //Else if RECTANGLE
