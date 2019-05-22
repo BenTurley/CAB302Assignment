@@ -133,14 +133,6 @@ public class GUI extends JFrame {
             //rectangle.DrawRectangle();
 
             if(tool == "Rectangle") {
-                /* Non-vector
-                Rectangle rectangle = new Rectangle(this.x1, this.y1, this.x2, this.y2, panel);
-                rectangle.DrawRectangle();
-                System.out.println(rectangle.RectangleOutputFormatted());
-                drawnShapes.add(rectangle.RectangleOutputFormatted());
-                System.out.println(drawnShapes);
-                 */
-
                 /* Vector */
                 Vector rectangle = new RectangleVector(this.x1, this.y1, this.x2, this.y2, drawingPanel);
                 rectangle.DrawVector();
@@ -149,16 +141,6 @@ public class GUI extends JFrame {
                 System.out.println(drawnShapes);
             }
             else if(tool == "Line"){
-
-                /* Non-vector
-                Line line = new Line(this.x1, this.y1, this.x2, this.y2, panel);
-                line.DrawLine();
-                System.out.println(line.LineOutputFormatted());
-                //Add line to array of objects
-                drawnShapes.add(line.LineOutputFormatted());
-                System.out.println(drawnShapes);
-                 */
-
                 /* Vector */
                 Vector line  = new LineVector(this.x1, this.y1, this.x2, this.y2, drawingPanel);
                 line.DrawVector();
@@ -167,7 +149,6 @@ public class GUI extends JFrame {
                 System.out.println(drawnShapes);
 
             }
-            //System.out.println("X co-ord: " + x2 + " Y co-ord: " + y2);
         }
 
         public void mouseEntered(MouseEvent e) {
