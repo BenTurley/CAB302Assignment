@@ -75,15 +75,15 @@ public class RectangleVector implements Vector {
         String formattedX2 = df.format(convertedX2);
         String formattedY2 = df.format(convertedY2);
 
-        System.out.println(convertedX1);
-        System.out.println(convertedY1);
-        System.out.println(convertedX2);
-        System.out.println(convertedY2);
+        //System.out.println(convertedX1);
+        //System.out.println(convertedY1);
+        //System.out.println(convertedX2);
+        //System.out.println(convertedY2);
 
-        System.out.println(formattedX1);
-        System.out.println(formattedY1);
-        System.out.println(formattedX2);
-        System.out.println(formattedY2);
+        //System.out.println(formattedX1);
+        //System.out.println(formattedY1);
+        //System.out.println(formattedX2);
+        //System.out.println(formattedY2);
         return "RECTANGLE " + formattedX1 + " " + formattedY1 + " " + formattedX2 + " " + formattedY2;
     }
 }

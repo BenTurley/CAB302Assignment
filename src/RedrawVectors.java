@@ -26,20 +26,20 @@ public class RedrawVectors {
             String str = vectorArray.get(x).toString();
             Matcher matcher = pattern.matcher(str);
             if (matcher.find()) {
-                System.out.println("Type: " + matcher.group(1));
-                System.out.println(matcher.group(1));
-                System.out.println("x1: " + matcher.group(2));
+                //System.out.println("Type: " + matcher.group(1));
+                //System.out.println(matcher.group(1));
+                //System.out.println("x1: " + matcher.group(2));
                 double outx1 = Double.valueOf(matcher.group(2));
-                System.out.println(outx1);
-                System.out.println("y1: " + matcher.group(3));
+                //System.out.println(outx1);
+                //System.out.println("y1: " + matcher.group(3));
                 double outy1 = Double.valueOf(matcher.group(3));
-                System.out.println(outy1);
-                System.out.println("x2: " + matcher.group(4));
+                //System.out.println(outy1);
+                //System.out.println("x2: " + matcher.group(4));
                 double outx2 = Double.valueOf(matcher.group(4));
-                System.out.println(outx2);
-                System.out.println("y2: " + matcher.group(5));
+                //System.out.println(outx2);
+                //System.out.println("y2: " + matcher.group(5));
                 double outy2 = Double.valueOf(matcher.group(5));
-                System.out.println(outy2);
+                //System.out.println(outy2);
                 //If LINE
 
                 if(matcher.group(1).equals("LINE ")) {
@@ -48,7 +48,7 @@ public class RedrawVectors {
                     Vector line = new LineVector(lineScale.x1(),lineScale.y1(), lineScale.x2(), lineScale.y2(), drawingPanel);
                     line.DrawVector();
                     System.out.println(line.VectorOutputFormatted());
-                    System.out.println(line);
+                    //System.out.println(line);
                     //drawnShapes.add(fileLine.LineOutputFormatted());
                 }
                 else if(matcher.group(1).equals("RECTANGLE ")) {

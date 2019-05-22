@@ -239,31 +239,25 @@ public class GUI extends JFrame {
                         //#Regular expressions
                         Matcher matcher = pattern.matcher(str);
                         if(matcher.find()) {
-                            System.out.println("Type: " + matcher.group(1));
-                            System.out.println(matcher.group(1));
-                            System.out.println("x1: " + matcher.group(2));
+                            //System.out.println("Type: " + matcher.group(1));
+                            //System.out.println(matcher.group(1));
+                            //System.out.println("x1: " + matcher.group(2));
                             double outx1 = Double.valueOf(matcher.group(2));
-                            System.out.println(outx1);
-                            System.out.println("y1: " + matcher.group(3));
+                            //System.out.println(outx1);
+                            //System.out.println("y1: " + matcher.group(3));
                             double outy1 = Double.valueOf(matcher.group(3));
-                            System.out.println(outy1);
-                            System.out.println("x2: " + matcher.group(4));
+                            //System.out.println(outy1);
+                            //System.out.println("x2: " + matcher.group(4));
                             double outx2 = Double.valueOf(matcher.group(4));
-                            System.out.println(outx2);
-                            System.out.println("y2: " + matcher.group(5));
+                            //System.out.println(outx2);
+                            //System.out.println("y2: " + matcher.group(5));
                             double outy2 = Double.valueOf(matcher.group(5));
-                            System.out.println(outy2);
+                            //System.out.println(outy2);
 
                             //If LINE
                             if(matcher.group(1).equals("LINE ")) {
-/*                                System.out.println("Detected LINE");
-                                Line fileLine = new Line(outx1, outy1, outx2, outy2, drawingPanel);
-                                fileLine.DrawLine();
-                                System.out.println(fileLine.LineOutputFormatted());
-                                System.out.println(fileLine);
-                                drawnShapes.add(fileLine.LineOutputFormatted());*/
-                                VectorScale lineScale = new VectorScale(outx1, outy1, outx2, outy2, drawingPanel);
                                 System.out.println("Detected LINE");
+                                VectorScale lineScale = new VectorScale(outx1, outy1, outx2, outy2, drawingPanel);
                                 Vector fileLine = new LineVector(lineScale.x1(), lineScale.y1(), lineScale.x2(), lineScale.y2(), drawingPanel);
                                 fileLine.DrawVector();
                                 System.out.println(fileLine.VectorOutputFormatted());
@@ -274,25 +268,15 @@ public class GUI extends JFrame {
                             //Else if RECTANGLE
                             else if(matcher.group(1).equals("RECTANGLE ")) {
                                 System.out.println("Detected RECTANGLE");
-                                Rectangle fileRectangle = new Rectangle(outx1, outy1, outx2, outy2, drawingPanel);
-                                fileRectangle.DrawRectangle();
-                                System.out.println(fileRectangle.RectangleOutputFormatted());
+                                VectorScale rectangleScale = new VectorScale(outx1, outy1, outx2, outy2, drawingPanel);
+                                RectangleVector fileRectangle = new RectangleVector(rectangleScale.x1(), rectangleScale.y1(), rectangleScale.x2(), rectangleScale.y2(), drawingPanel);
+                                fileRectangle.DrawVector();
+                                System.out.println(fileRectangle.VectorOutputFormatted());
                                 System.out.println(fileRectangle);
-                                drawnShapes.add(fileRectangle.RectangleOutputFormatted());
+                                drawnShapes.add(fileRectangle.VectorOutputFormatted());
                             }
                         }
-                        //#
                     }
-
-
-
-
-
-                    /*
-                    Line line = new Line(this.x1, this.y1, this.x2, this.y2, panel);
-                    line.DrawLine();
-                     */
-                    //!
                 }
                 else {
                     //Set display label to say user cancelled
