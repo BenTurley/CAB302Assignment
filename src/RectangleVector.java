@@ -57,7 +57,7 @@ public class RectangleVector implements Vector {
         g.drawRect((int) x1,(int)y1,xDiff,yDiff);
     }
 
-    @Override
+    
     public void FillVector(String colour) {
         int xDiff = (int) Math.abs(x2-x1);
         int yDiff = (int) Math.abs(y2-y1);
