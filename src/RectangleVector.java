@@ -58,6 +58,29 @@ public class RectangleVector implements Vector {
     }
 
     @Override
+    public void FillVector(String colour) {
+        int xDiff = (int) Math.abs(x2-x1);
+        int yDiff = (int) Math.abs(y2-y1);
+
+        if((this.x1 > this.x2) && (this.y1 <= this.y2)){
+            xSwap();
+        }
+
+        else if((this.x1 <= this.x2) && (this.y1 > this.y2)){
+            ySwap();
+        }
+        else if((this.x1 > this.x2) && (this.y1 > this.y2)){
+            ySwap();
+            xSwap();
+        }
+
+        Graphics g = panel.getGraphics();
+        g.setColor(Color.getColor(colour));
+        g.fillRect((int) x1,(int)y1,xDiff,yDiff);
+    }
+
+
+    @Override
     public String VectorOutputFormatted() {
         /* Make a class to handle this*/
         double panelHeight = panel.getSize().height;
