@@ -16,10 +16,37 @@ public class OvalVector implements Vector{
         this.panel = panel;
     }
 
+    private void xSwap(){
+        int temp = (int) this.x2;
+        this.x2 = this.x1;
+        this.x1 = temp;
+    }
+
+    /**
+     * Swaps y1 and y2 when called
+     */
+    private void ySwap(){
+        int temp = (int) this.y2;
+        this.y2 = this.y1;
+        this.y1 = temp;
+    }
+
     @Override
     public void DrawVector() {
         int xDiff = (int) Math.abs(x2-x1);
         int yDiff = (int) Math.abs(y2-y1);
+
+        if((this.x1 > this.x2) && (this.y1 <= this.y2)){
+            xSwap();
+        }
+
+        else if((this.x1 <= this.x2) && (this.y1 > this.y2)){
+            ySwap();
+        }
+        else if((this.x1 > this.x2) && (this.y1 > this.y2)){
+            ySwap();
+            xSwap();
+        }
 
         Graphics g = panel.getGraphics();
         g.drawOval((int) x1,(int)y1,xDiff,yDiff);
