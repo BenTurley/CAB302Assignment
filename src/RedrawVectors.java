@@ -20,7 +20,7 @@ public class RedrawVectors {
         int panelWidth = drawingPanel.getSize().width;
         Graphics g = drawingPanel.getGraphics();
         g.clearRect(0,0,panelWidth,panelHeight);
-        String regex = "(LINE |RECTANGLE )([0-9.]+) ([0-9.]+) ([0-9.]+) ([0-9.]+)";
+        String regex = "(LINE |RECTANGLE |OVAL )([0-9.]+) ([0-9.]+) ([0-9.]+) ([0-9.]+)";
 
         Pattern pattern = Pattern.compile(regex);
         for (int x = 0; x < vectorArray.size(); x++) {
@@ -68,6 +68,15 @@ public class RedrawVectors {
                     Vector filePlot = new PlotVector(plotScale.x1(), plotScale.y1(), drawingPanel);
                     filePlot.DrawVector();
                     System.out.println(filePlot.VectorOutputFormatted());
+                }
+                else if(matcher.group(1).equals("OVAL ")) {
+                    System.out.println("Detected OVAL");
+                    VectorScale ovalScales = new VectorScale(outx1, outy1, outx2, outy2, drawingPanel);
+                    Vector fileOval = new OvalVector(ovalScales.x1(), ovalScales.y1(), ovalScales.x2(),  ovalScales.y2(), drawingPanel);
+                    fileOval.DrawVector();
+                    System.out.println(fileOval.VectorOutputFormatted());
+                    //System.out.println(fileRectangle);
+                    //drawnShapes.add(fileRectangle.RectangleOutputFormatted());
                 }
             }
         }
