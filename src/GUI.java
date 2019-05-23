@@ -172,8 +172,8 @@ public class GUI extends JFrame {
                 Vector Oval  = new OvalVector(this.x1, this.y1, this.x2, this.y2, drawingPanel);
                 Oval.DrawVector();
                 //System.out.println(line.VectorOutputFormatted());
-/*                drawnShapes.add(line.VectorOutputFormatted());
-                System.out.println(drawnShapes);*/
+                drawnShapes.add(Oval.VectorOutputFormatted());
+                System.out.println(drawnShapes);
             }
         }
 
