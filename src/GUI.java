@@ -55,14 +55,17 @@ public class GUI extends JFrame {
         JMenuItem lineItem = new JMenuItem("Line");
         JMenuItem rectangleItem = new JMenuItem("Rectangle");
         JMenuItem plotItem = new JMenuItem("Plot");
+        JMenuItem OvalItem = new JMenuItem("Oval");
         //Add functionality to tools
         lineItem.addActionListener(new ButtonListener());
         rectangleItem.addActionListener(new ButtonListener());
         plotItem.addActionListener(new ButtonListener());
+        OvalItem.addActionListener(new ButtonListener());
         //Add tool menu items to menu
         toolMenu.add(lineItem);
         toolMenu.add(rectangleItem);
         toolMenu.add(plotItem);
+        toolMenu.add(OvalItem);
         //Add tool menu to menu bar
         menuBar.add(toolMenu);
 
@@ -99,6 +102,9 @@ public class GUI extends JFrame {
             else if(buttonString.equals("Line")){
                 tool = "Line";
                 //System.out.println("Line");
+            }
+            else if(buttonString.equals("Oval")) {
+                tool = "Oval";
             }
             else if(buttonString.equals("Plot")) {
                 tool = "Plot";
@@ -160,6 +166,14 @@ public class GUI extends JFrame {
                 //System.out.println(line.VectorOutputFormatted());
                 drawnShapes.add(line.VectorOutputFormatted());
                 System.out.println(drawnShapes);
+            }
+            else if(tool == "Oval"){
+                /* Vector */
+                Vector Oval  = new OvalVector(this.x1, this.y1, this.x2, this.y2, drawingPanel);
+                Oval.DrawVector();
+                //System.out.println(line.VectorOutputFormatted());
+/*                drawnShapes.add(line.VectorOutputFormatted());
+                System.out.println(drawnShapes);*/
             }
         }
 
