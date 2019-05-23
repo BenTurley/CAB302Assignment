@@ -21,25 +21,27 @@ public class RedrawVectors {
         Graphics g = drawingPanel.getGraphics();
         g.clearRect(0,0,panelWidth,panelHeight);
         String regex = "(LINE |RECTANGLE )([0-9.]+) ([0-9.]+) ([0-9.]+) ([0-9.]+)";
+
         Pattern pattern = Pattern.compile(regex);
         for (int x = 0; x < vectorArray.size(); x++) {
             String str = vectorArray.get(x).toString();
             Matcher matcher = pattern.matcher(str);
             if (matcher.find()) {
-                //System.out.println("Type: " + matcher.group(1));
-                //System.out.println(matcher.group(1));
-                //System.out.println("x1: " + matcher.group(2));
+
+                System.out.println("Type: " + matcher.group(1));
+                System.out.println(matcher.group(1));
+                System.out.println("x1: " + matcher.group(2));
                 double outx1 = Double.valueOf(matcher.group(2));
-                //System.out.println(outx1);
-                //System.out.println("y1: " + matcher.group(3));
+                System.out.println(outx1);
+                System.out.println("y1: " + matcher.group(3));
                 double outy1 = Double.valueOf(matcher.group(3));
-                //System.out.println(outy1);
-                //System.out.println("x2: " + matcher.group(4));
+                System.out.println(outy1);
+                System.out.println("x2: " + matcher.group(4));
                 double outx2 = Double.valueOf(matcher.group(4));
-                //System.out.println(outx2);
-                //System.out.println("y2: " + matcher.group(5));
+                System.out.println(outx2);
+                System.out.println("y2: " + matcher.group(5));
                 double outy2 = Double.valueOf(matcher.group(5));
-                //System.out.println(outy2);
+                System.out.println(outy2);
                 //If LINE
 
                 if(matcher.group(1).equals("LINE ")) {
@@ -57,8 +59,15 @@ public class RedrawVectors {
                     Vector fileRectangle = new RectangleVector(rectangleScale.x1(), rectangleScale.y1(), rectangleScale.x2(),  rectangleScale.y2(), drawingPanel);
                     fileRectangle.DrawVector();
                     System.out.println(fileRectangle.VectorOutputFormatted());
-                    System.out.println(fileRectangle);
+                    //System.out.println(fileRectangle);
                     //drawnShapes.add(fileRectangle.RectangleOutputFormatted());
+                }
+                else if(matcher.group(1).equals("PLOT ")) {
+                    System.out.println("Detected PLOT");
+                    VectorScale plotScale = new VectorScale(outx1, outy1, outx1, outy1, drawingPanel);
+                    Vector filePlot = new PlotVector(plotScale.x1(), plotScale.y1(), drawingPanel);
+                    filePlot.DrawVector();
+                    System.out.println(filePlot.VectorOutputFormatted());
                 }
             }
 

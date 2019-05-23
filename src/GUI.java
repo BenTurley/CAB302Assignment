@@ -54,12 +54,15 @@ public class GUI extends JFrame {
         //Create tool menu items
         JMenuItem lineItem = new JMenuItem("Line");
         JMenuItem rectangleItem = new JMenuItem("Rectangle");
+        JMenuItem plotItem = new JMenuItem("Plot");
         //Add functionality to tools
         lineItem.addActionListener(new ButtonListener());
         rectangleItem.addActionListener(new ButtonListener());
+        plotItem.addActionListener(new ButtonListener());
         //Add tool menu items to menu
         toolMenu.add(lineItem);
         toolMenu.add(rectangleItem);
+        toolMenu.add(plotItem);
         //Add tool menu to menu bar
         menuBar.add(toolMenu);
 
@@ -97,6 +100,9 @@ public class GUI extends JFrame {
                 tool = "Line";
                 //System.out.println("Line");
             }
+            else if(buttonString.equals("Plot")) {
+                tool = "Plot";
+            }
             else if(buttonString.equals("New")) {
                 drawnShapes.clear();
                 System.out.println(drawnShapes);
@@ -120,6 +126,13 @@ public class GUI extends JFrame {
             this.y1 = (e.getY());
             //System.out.println("Click!");
             //System.out.println("X co-ord: " + x1 + " Y co-ord: " + y1);
+            if(tool == "Plot") {
+                PlotVector plot = new PlotVector(this.x1, this.y1, drawingPanel);
+                plot.DrawVector();
+                drawnShapes.add(plot.VectorOutputFormatted());
+                System.out.println(drawnShapes);
+
+            }
         }
 
         public void mouseReleased(MouseEvent e) {
@@ -136,7 +149,7 @@ public class GUI extends JFrame {
                 /* Vector */
                 Vector rectangle = new RectangleVector(this.x1, this.y1, this.x2, this.y2, drawingPanel);
                 rectangle.DrawVector();
-                System.out.println(rectangle.VectorOutputFormatted());
+                //System.out.println(rectangle.VectorOutputFormatted());
                 drawnShapes.add(rectangle.VectorOutputFormatted());
                 System.out.println(drawnShapes);
             }
@@ -144,10 +157,9 @@ public class GUI extends JFrame {
                 /* Vector */
                 Vector line  = new LineVector(this.x1, this.y1, this.x2, this.y2, drawingPanel);
                 line.DrawVector();
-                System.out.println(line.VectorOutputFormatted());
+                //System.out.println(line.VectorOutputFormatted());
                 drawnShapes.add(line.VectorOutputFormatted());
                 System.out.println(drawnShapes);
-
             }
         }
 
