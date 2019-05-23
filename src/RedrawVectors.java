@@ -70,7 +70,6 @@ public class RedrawVectors {
                     System.out.println(filePlot.VectorOutputFormatted());
                 }
             }
-
         }
     }
 }
