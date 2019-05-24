@@ -24,7 +24,7 @@ public class RedrawVectors {
         Graphics g = drawingPanel.getGraphics();
         g.clearRect(0,0,panelWidth,panelHeight);
 
-        String baseRegex = "(LINE|RECTANGLE|PLOT|OVAL|FILL) ([0-9. ]+|#[[A-F]0-9. ]+)";
+        String baseRegex = "(LINE|RECTANGLE|PLOT|OVAL|FILL) ([0-9. ]+|#[A-FO0-9]+|OFF)";
         Pattern basePattern = Pattern.compile(baseRegex);
         for(int x = 0; x < vectorArray.size(); x++) {
             System.out.println("Iteration: " + x);
@@ -57,11 +57,13 @@ public class RedrawVectors {
                     VectorScale rectangleScale = new VectorScale(Double.valueOf(split[0]),Double.valueOf(split[1]), Double.valueOf(split[2]),Double.valueOf(split[3]), drawingPanel);
                     Vector rectangle = new RectangleVector(rectangleScale.x1(), rectangleScale.y1(), rectangleScale.x2(), rectangleScale.y2(), drawingPanel);
                     //if(colour == ""){
+
                     if(colour.equals("")) {
                         rectangle.DrawVector();
                     }
                     else{
                         ((RectangleVector) rectangle).FillVector(colour);
+                        rectangle.DrawVector();
                     }
 
                 }
