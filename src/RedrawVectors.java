@@ -16,12 +16,13 @@ public class RedrawVectors {
     }
 
     public void redraw() {
+        String colour = "";
         int panelHeight = drawingPanel.getSize().height;
         int panelWidth = drawingPanel.getSize().width;
         Graphics g = drawingPanel.getGraphics();
         g.clearRect(0,0,panelWidth,panelHeight);
 
-        String baseRegex = "(LINE|RECTANGLE|PLOT|OVAL) ([0-9. ]+)";
+        String baseRegex = "(LINE|RECTANGLE|PLOT|OVAL|FILL) ([0-9. ]+|#[0-9. ]+)";
         Pattern basePattern = Pattern.compile(baseRegex);
         for(int x = 0; x < vectorArray.size(); x++) {
             System.out.println("Iteration: " + x);
@@ -52,7 +53,13 @@ public class RedrawVectors {
                 else if(matcher.group(1).equals("RECTANGLE")) {
                     VectorScale rectangleScale = new VectorScale(Double.valueOf(split[0]),Double.valueOf(split[1]), Double.valueOf(split[2]),Double.valueOf(split[3]), drawingPanel);
                     Vector rectangle = new RectangleVector(rectangleScale.x1(), rectangleScale.y1(), rectangleScale.x2(), rectangleScale.y2(), drawingPanel);
-                    rectangle.DrawVector();
+                    if(colour == ""){
+                        rectangle.DrawVector();
+                    }
+                    else{
+                        ((RectangleVector) rectangle).FillVector(colour);
+                    }
+                    System.out.println("TEST");
                 }
                 else if(matcher.group(1).equals("OVAL")) {
                     VectorScale ovalScale = new VectorScale(Double.valueOf(split[0]),Double.valueOf(split[1]), Double.valueOf(split[2]),Double.valueOf(split[3]), drawingPanel);
@@ -63,6 +70,10 @@ public class RedrawVectors {
                     VectorScale plotScale = new VectorScale(Double.valueOf(split[0]),Double.valueOf(split[1]), Double.valueOf(split[0]), Double.valueOf(split[1]), drawingPanel);
                     Vector plot = new PlotVector(plotScale.x1(), plotScale.y1(), drawingPanel);
                     plot.DrawVector();
+                }
+                else if(matcher.group(1).equals("FILL")) {
+                    colour = split[0];
+                    System.out.println("FILL: " + split[0]);
                 }
 
             }
