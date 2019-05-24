@@ -29,21 +29,22 @@ public class RedrawVectors {
             String str = vectorArray.get(x).toString();
             Matcher matcher = basePattern.matcher(str);
             if(matcher.find()) {
-                System.out.println("Match 1: " + matcher.group(1) + "|");
-                System.out.println("Match 2: " + matcher.group(2) + "|");
-                //String coordRegex = "([0-9. ]+)";
-                //Pattern coordPattern = Pattern.compile(coordRegex);
+                System.out.println("Match 1: " + matcher.group(1));
+                System.out.println("Match 2: " + matcher.group(2));
+                
                 String[] split = matcher.group(2).split(" ");
-                System.out.println("The split array x1 is: " + split[0]);
-                System.out.println("The split array y1 is: " + split[1]);
+                //System.out.println("The split array x1 is: " + split[0]);
+                //System.out.println("The split array y1 is: " + split[1]);
 
                 String type = matcher.group(1);
                 System.out.println("Assigned type as: " + type);
+                /*
                 if(!matcher.group(1).equals("PLOT")) {
                     System.out.println("Found not plot!");
                     System.out.println("The split array x2 is: " + split[2]);
                     System.out.println("The split array y2 is: " + split[3]);
                 }
+                */
                 //Draw vectors
                 if(matcher.group(1).equals("LINE")) {
                     VectorScale lineScale = new VectorScale(Double.valueOf(split[0]),Double.valueOf(split[1]), Double.valueOf(split[2]),Double.valueOf(split[3]), drawingPanel);
@@ -59,7 +60,7 @@ public class RedrawVectors {
                     else{
                         ((RectangleVector) rectangle).FillVector(colour);
                     }
-                    System.out.println("TEST");
+
                 }
                 else if(matcher.group(1).equals("OVAL")) {
                     VectorScale ovalScale = new VectorScale(Double.valueOf(split[0]),Double.valueOf(split[1]), Double.valueOf(split[2]),Double.valueOf(split[3]), drawingPanel);
