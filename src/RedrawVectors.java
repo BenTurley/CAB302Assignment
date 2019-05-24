@@ -24,7 +24,7 @@ public class RedrawVectors {
         Graphics g = drawingPanel.getGraphics();
         g.clearRect(0,0,panelWidth,panelHeight);
 
-        String baseRegex = "(LINE|RECTANGLE|PLOT|OVAL|FILL) ([0-9. ]+|#[0-9. ]+)";
+        String baseRegex = "(LINE|RECTANGLE|PLOT|OVAL|FILL) ([0-9. ]+|#[F0-9. ]+)";
         Pattern basePattern = Pattern.compile(baseRegex);
         for(int x = 0; x < vectorArray.size(); x++) {
             System.out.println("Iteration: " + x);
