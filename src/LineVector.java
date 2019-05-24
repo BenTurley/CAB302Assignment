@@ -8,6 +8,7 @@ public class LineVector implements Vector {
     private double x2;
     private double y2;
     private JPanel panel;
+    private Color localColour;
 
     public LineVector(double x1, double y1, double x2, double y2, JPanel panel){
         this.x1 = x1;
@@ -18,8 +19,13 @@ public class LineVector implements Vector {
     }
 
 
+    public void SetColour(Color colour) {
+        this.localColour = colour;
+    }
+
     public void DrawVector() {
         Graphics g = panel.getGraphics();
+        g.setColor(localColour);
         g.drawLine((int) x1,(int)y1,(int)x2,(int)y2);
 
     }

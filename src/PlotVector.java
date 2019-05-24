@@ -6,6 +6,7 @@ public class PlotVector implements Vector {
     private double x1;
     private double y1;
     private JPanel panel;
+    private Color localColour;
 
     public PlotVector(double x1, double y1, JPanel panel) {
         this.x1 = x1;
@@ -13,8 +14,13 @@ public class PlotVector implements Vector {
         this.panel = panel;
     }
 
+    public void SetColour(Color colour) {
+        this.localColour = colour;
+    }
+
     public void DrawVector() {
         Graphics g = panel.getGraphics();
+        g.setColor(localColour);
         g.drawLine((int)x1,(int)y1,(int)x1,(int)y1);
     }
 

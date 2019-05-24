@@ -53,6 +53,7 @@ public class RedrawVectors {
                 if(matcher.group(1).equals("LINE")) {
                     VectorScale lineScale = new VectorScale(Double.valueOf(split[0]),Double.valueOf(split[1]), Double.valueOf(split[2]),Double.valueOf(split[3]), drawingPanel);
                     Vector line = new LineVector(lineScale.x1(), lineScale.y1(), lineScale.x2(), lineScale.y2(), drawingPanel);
+                    line.SetColour(currentColour);
                     line.DrawVector();
                 }
                 else if(matcher.group(1).equals("RECTANGLE")) {
@@ -61,10 +62,12 @@ public class RedrawVectors {
                     //if(fillColour == ""){
 
                     if(fillColour.equals("")) {
+                        rectangle.SetColour(currentColour);
                         rectangle.DrawVector();
                     }
                     else{
                         ((RectangleVector) rectangle).FillVector(fillColour);
+                        rectangle.SetColour(currentColour);
                         rectangle.DrawVector();
                     }
 
@@ -72,37 +75,40 @@ public class RedrawVectors {
                 else if(matcher.group(1).equals("OVAL")) {
                     VectorScale ovalScale = new VectorScale(Double.valueOf(split[0]),Double.valueOf(split[1]), Double.valueOf(split[2]),Double.valueOf(split[3]), drawingPanel);
                     Vector oval = new OvalVector(ovalScale.x1(), ovalScale.y1(), ovalScale.x2(), ovalScale.y2(), drawingPanel);
+                    oval.SetColour(currentColour);
                     oval.DrawVector();
                 }
                 else if(matcher.group(1).equals("PLOT")) {
                     VectorScale plotScale = new VectorScale(Double.valueOf(split[0]),Double.valueOf(split[1]), Double.valueOf(split[0]), Double.valueOf(split[1]), drawingPanel);
                     Vector plot = new PlotVector(plotScale.x1(), plotScale.y1(), drawingPanel);
+                    plot.SetColour(currentColour);
                     plot.DrawVector();
                 }
                 else if(matcher.group(1).equals("PEN")) {
                     penColour = split[0];
                     System.out.println("String penColour is: " + penColour);
                     if(penColour.equals("#000000")) {
-                        System.out.println("#000000");
-                        currentColour = Color.black;
+                        System.out.println("Found pen: #000000");
+                        this.currentColour = Color.black;
                     }
                     else if(penColour.equals("#FF0000")) {
-                        System.out.println("#FF0000");
-                        currentColour = Color.red;
+                        System.out.println("Found pen: #FF0000");
+                        this.currentColour = Color.red;
                     }
                     else if(penColour.equals("#0000FF")) {
-                        System.out.println("#0000FF");
-                        currentColour = Color.blue;
+                        System.out.println("Found pen: #0000FF");
+                        this.currentColour = Color.blue;
                     }
 
-                    g.setColor(currentColour);
+
 
                 }
                 else if(matcher.group(1).equals("FILL")) {
-                    fillColour = split[0];
+                    this.fillColour = split[0];
                     System.out.println(fillColour);
                     if(fillColour.equals("OFF")) {
-                        fillColour = "";
+                        System.out.println("Set fillColour to \"\"");
+                        this.fillColour = "";
                     }
                     System.out.println("FILL: " + split[0]);
                 }

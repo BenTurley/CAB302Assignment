@@ -8,6 +8,7 @@ public class OvalVector implements Vector{
     private double x2;
     private double y2;
     private JPanel panel;
+    private Color localColour;
 
     public OvalVector(double x1, double y1, double x2, double y2, JPanel panel){
         this.x1 = x1;
@@ -32,6 +33,10 @@ public class OvalVector implements Vector{
         this.y1 = temp;
     }
 
+    public void SetColour(Color colour) {
+        this.localColour = colour;
+    }
+
     @Override
     public void DrawVector() {
         int xDiff = (int) Math.abs(x2-x1);
@@ -50,6 +55,7 @@ public class OvalVector implements Vector{
         }
 
         Graphics g = panel.getGraphics();
+        g.setColor(localColour);
         g.drawOval((int) x1,(int)y1,xDiff,yDiff);
     }
 

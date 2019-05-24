@@ -89,9 +89,9 @@ public class GUI extends JFrame {
         JMenuItem redPen = new JMenuItem("Red");
         JMenuItem bluePen = new JMenuItem("Blue");
         //Add functionality to pen items
-        blackPen.addActionListener(new ButtonListener());
-        redPen.addActionListener(new ButtonListener());
-        bluePen.addActionListener(new ButtonListener());
+        blackPen.addActionListener(new PenButtonListener());
+        redPen.addActionListener(new PenButtonListener());
+        bluePen.addActionListener(new PenButtonListener());
         //Add pen colour menu items to menu
         penColourMenu.add(blackPen);
         penColourMenu.add(redPen);
@@ -133,6 +133,23 @@ public class GUI extends JFrame {
     }
 
 
+    public class PenButtonListener implements ActionListener {
+        public void actionPerformed(ActionEvent f) {
+            String buttonString = f.getActionCommand();
+
+            //Pen
+            if(buttonString.equals("Black")) {
+                drawnShapes.add("PEN #000000");
+            }
+            else if(buttonString.equals("Red")) {
+                drawnShapes.add("PEN #FF0000");
+            }
+            else if(buttonString.equals("Blue")) {
+                drawnShapes.add("PEN #0000FF");
+            }
+        }
+    }
+
     public class ButtonListener implements MouseListener, ActionListener {
         private double x1;
         private double y1;
@@ -173,6 +190,7 @@ public class GUI extends JFrame {
                 redrawPanel.redraw();
             }
             //Pen
+            /*
             else if(buttonString.equals("Black")) {
                 drawnShapes.add("PEN #000000");
             }
@@ -182,6 +200,8 @@ public class GUI extends JFrame {
             else if(buttonString.equals("Blue")) {
                 drawnShapes.add("PEN #0000FF");
             }
+
+             */
 
             //Fill
             else if(buttonString.equals("None")) {
