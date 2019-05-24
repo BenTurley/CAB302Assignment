@@ -96,7 +96,7 @@ public class GUI extends JFrame {
         penColourMenu.add(blackPen);
         penColourMenu.add(redPen);
         penColourMenu.add(bluePen);
-        //Add pen colour menu to menubar
+        //Add pen colour menu to menu bar
         menuBar.add(penColourMenu);
 
         //Create fill colour menu
@@ -164,11 +164,9 @@ public class GUI extends JFrame {
 
             if (buttonString == "Rectangle") {
                 tool = "Rectangle";
-                //System.out.println("Rectangle");
             }
             else if(buttonString.equals("Line")){
                 tool = "Line";
-                //System.out.println("Line");
             }
             else if(buttonString.equals("Oval")) {
                 tool = "Oval";
@@ -189,36 +187,19 @@ public class GUI extends JFrame {
                 RedrawVectors redrawPanel = new RedrawVectors(drawnShapes, drawingPanel);
                 redrawPanel.redraw();
             }
-            //Pen
-            /*
-            else if(buttonString.equals("Black")) {
-                drawnShapes.add("PEN #000000");
-            }
-            else if(buttonString.equals("Red")) {
-                drawnShapes.add("PEN #FF0000");
-            }
-            else if(buttonString.equals("Blue")) {
-                drawnShapes.add("PEN #0000FF");
-            }
-
-             */
-
             //Fill
             else if(buttonString.equals("None")) {
                 drawnShapes.add("FILL OFF");
                 colour = "";
             }
             else if(buttonString.equals("Gray")) {
-                //System.out.println("FILL #808080");
                 drawnShapes.add("FILL #808080");
                 colour = "#808080";
             }
             else if(buttonString.equals("Red")) {
-                //System.out.println("FILL #FF0000");
                 drawnShapes.add("FILL #FF0000");
                 colour = "#FF0000";
             }
-
         }
 
         public void mouseClicked(MouseEvent e) {
@@ -226,14 +207,8 @@ public class GUI extends JFrame {
         }
 
         public void mousePressed(MouseEvent e) {
-            //double x1 = (e.getX());      //!Change to divide based on dimension of window, scaling from 0 - 1
-            //double y1 = (e.getY());      //!Change to divide based on dimension of window, scaling from 0 - 1
-            //RedrawVectors redrawPanel = new RedrawVectors(drawnShapes, drawingPanel);
-            //redrawPanel.redraw();
             this.x1 = (e.getX());
             this.y1 = (e.getY());
-            //System.out.println("Click!");
-            //System.out.println("X co-ord: " + x1 + " Y co-ord: " + y1);
             if(tool == "Plot") {
                 PlotVector plot = new PlotVector(this.x1, this.y1, drawingPanel);
                 plot.DrawVector();
@@ -244,14 +219,8 @@ public class GUI extends JFrame {
         }
 
         public void mouseReleased(MouseEvent e) {
-            //System.out.println(tool);
-            //double x2 = (e.getX());      //!Change to divide based on dimension of window, scaling from 0 - 1
-            //double y2 = (e.getY());      //!Change to divide based on dimension of window, scaling from 0 - 1
             this.x2 = (e.getX());
             this.y2 = (e.getY());
-
-            //Rectangle rectangle = new Rectangle(x1, y1, x2, y2, panel);
-            //rectangle.DrawRectangle();
 
             if(tool == "Rectangle") {
                 /* Vector */
@@ -264,24 +233,18 @@ public class GUI extends JFrame {
                 else{
                     rectangle.DrawVector();
                 }
-
-                //System.out.println(rectangle.VectorOutputFormatted());
                 drawnShapes.add(rectangle.VectorOutputFormatted());
                 System.out.println(drawnShapes);
             }
             else if(tool == "Line"){
-                /* Vector */
                 Vector line  = new LineVector(this.x1, this.y1, this.x2, this.y2, drawingPanel);
                 line.DrawVector();
-                //System.out.println(line.VectorOutputFormatted());
                 drawnShapes.add(line.VectorOutputFormatted());
                 System.out.println(drawnShapes);
             }
             else if(tool == "Oval"){
-                /* Vector */
                 Vector Oval  = new OvalVector(this.x1, this.y1, this.x2, this.y2, drawingPanel);
                 Oval.DrawVector();
-                //System.out.println(line.VectorOutputFormatted());
                 drawnShapes.add(Oval.VectorOutputFormatted());
                 System.out.println(drawnShapes);
             }
