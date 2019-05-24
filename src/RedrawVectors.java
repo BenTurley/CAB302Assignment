@@ -8,6 +8,7 @@ public class RedrawVectors {
     private ArrayList<String> vectorArray;
     private ArrayList<Double> VectorCords = new ArrayList<>();
     private JPanel drawingPanel;
+    private String colour = "";
 
 
     public RedrawVectors(ArrayList<String> vectorArray, JPanel drawingPanel) {
@@ -16,9 +17,10 @@ public class RedrawVectors {
     }
 
     public void redraw() {
-        String colour = "";
+
         int panelHeight = drawingPanel.getSize().height;
         int panelWidth = drawingPanel.getSize().width;
+
         Graphics g = drawingPanel.getGraphics();
         g.clearRect(0,0,panelWidth,panelHeight);
 
@@ -31,7 +33,7 @@ public class RedrawVectors {
             if(matcher.find()) {
                 System.out.println("Match 1: " + matcher.group(1));
                 System.out.println("Match 2: " + matcher.group(2));
-                
+
                 String[] split = matcher.group(2).split(" ");
                 //System.out.println("The split array x1 is: " + split[0]);
                 //System.out.println("The split array y1 is: " + split[1]);
@@ -54,7 +56,8 @@ public class RedrawVectors {
                 else if(matcher.group(1).equals("RECTANGLE")) {
                     VectorScale rectangleScale = new VectorScale(Double.valueOf(split[0]),Double.valueOf(split[1]), Double.valueOf(split[2]),Double.valueOf(split[3]), drawingPanel);
                     Vector rectangle = new RectangleVector(rectangleScale.x1(), rectangleScale.y1(), rectangleScale.x2(), rectangleScale.y2(), drawingPanel);
-                    if(colour == ""){
+                    //if(colour == ""){
+                    if(colour.equals("")) {
                         rectangle.DrawVector();
                     }
                     else{
@@ -74,6 +77,12 @@ public class RedrawVectors {
                 }
                 else if(matcher.group(1).equals("FILL")) {
                     colour = split[0];
+                    System.out.println(colour);
+                    if(colour.equals("OFF")) {
+                        colour = "";
+                    }
+
+
                     System.out.println("FILL: " + split[0]);
                 }
 

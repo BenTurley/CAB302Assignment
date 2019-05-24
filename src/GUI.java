@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 public class GUI extends JFrame {
     private JPanel drawingPanel;
     private String tool;
+    private String colour = "";
 
     public ArrayList<String> drawnShapes = new ArrayList<>();
 
@@ -69,12 +70,22 @@ public class GUI extends JFrame {
         //Add tool menu to menu bar
         menuBar.add(toolMenu);
 
-
-        JMenu ColourMenu = new JMenu("Colour");
-        JMenuItem gray = new JMenuItem("GRAY");
+        //Create colour menu
+        JMenu fillColourMenu = new JMenu("Fill");
+        //Create colour menu items
+        JMenuItem noFill = new JMenuItem("None");
+        JMenuItem gray = new JMenuItem("Gray");
+        JMenuItem red = new JMenuItem("Red");
+        //Add functionality to tools
+        noFill.addActionListener(new ButtonListener());
         gray.addActionListener(new ButtonListener());
-        ColourMenu.add(gray);
-        menuBar.add(ColourMenu);
+        red.addActionListener(new ButtonListener());
+        //Add colour menu items to menu
+        fillColourMenu.add(noFill);
+        fillColourMenu.add(gray);
+        fillColourMenu.add(red);
+        //Add colour menu to menu bar
+        menuBar.add(fillColourMenu);
 
 
 
@@ -98,7 +109,7 @@ public class GUI extends JFrame {
         private double y1;
         private double x2;
         private double y2;
-        private String colour = "";
+
 
 
 
@@ -127,11 +138,21 @@ public class GUI extends JFrame {
                 Graphics g = drawingPanel.getGraphics();
                 g.clearRect(0,0,panelWidth,panelHeight);
             }
-            else if(buttonString.equals("GRAY")) {
-                System.out.println("FILL #808080");
+            else if(buttonString.equals("None")) {
+                drawnShapes.add("FILL OFF");
+                colour = "";
+            }
+            else if(buttonString.equals("Gray")) {
+                //System.out.println("FILL #808080");
                 drawnShapes.add("FILL #808080");
                 colour = "#808080";
             }
+            else if(buttonString.equals("Red")) {
+                //System.out.println("FILL #FF0000");
+                drawnShapes.add("FILL #FF0000");
+                colour = "#FF0000";
+            }
+
         }
 
         public void mouseClicked(MouseEvent e) {
@@ -169,7 +190,9 @@ public class GUI extends JFrame {
             if(tool == "Rectangle") {
                 /* Vector */
                 Vector rectangle = new RectangleVector(this.x1, this.y1, this.x2, this.y2, drawingPanel);
-                if(colour != ""){
+                System.out.println("mouseReleased colour is: " + colour);
+                //if(colour != ""){
+                if(!colour.equals("")) {
                     ((RectangleVector) rectangle).FillVector(colour);
                 }
                 else{
