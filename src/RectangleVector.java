@@ -75,7 +75,7 @@ public class RectangleVector implements Vector {
         }
 
         Graphics g = panel.getGraphics();
-        g.setColor(Color.getColor(colour));
+        g.setColor(Color.decode(colour));
         g.fillRect((int) x1,(int)y1,xDiff,yDiff);
     }
 
