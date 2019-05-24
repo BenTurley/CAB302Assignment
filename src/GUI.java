@@ -69,6 +69,15 @@ public class GUI extends JFrame {
         //Add tool menu to menu bar
         menuBar.add(toolMenu);
 
+
+        JMenu ColourMenu = new JMenu("Colour");
+        JMenuItem gray = new JMenuItem("GRAY");
+        gray.addActionListener(new ButtonListener());
+        ColourMenu.add(gray);
+        menuBar.add(ColourMenu);
+
+
+
         this.setJMenuBar(menuBar);
 
         //Display window
@@ -89,6 +98,7 @@ public class GUI extends JFrame {
         private double y1;
         private double x2;
         private double y2;
+        private String colour = "";
 
 
 
@@ -116,6 +126,11 @@ public class GUI extends JFrame {
                 int panelWidth = drawingPanel.getSize().width;
                 Graphics g = drawingPanel.getGraphics();
                 g.clearRect(0,0,panelWidth,panelHeight);
+            }
+            else if(buttonString.equals("GRAY")) {
+                System.out.println("FILL #808080");
+                drawnShapes.add("FILL #808080");
+                colour = "#808080";
             }
         }
 
@@ -154,7 +169,13 @@ public class GUI extends JFrame {
             if(tool == "Rectangle") {
                 /* Vector */
                 Vector rectangle = new RectangleVector(this.x1, this.y1, this.x2, this.y2, drawingPanel);
-                rectangle.DrawVector();
+                if(colour != ""){
+                    ((RectangleVector) rectangle).FillVector(colour);
+                }
+                else{
+                    rectangle.DrawVector();
+                }
+
                 //System.out.println(rectangle.VectorOutputFormatted());
                 drawnShapes.add(rectangle.VectorOutputFormatted());
                 System.out.println(drawnShapes);
