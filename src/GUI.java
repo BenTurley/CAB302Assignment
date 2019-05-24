@@ -50,6 +50,18 @@ public class GUI extends JFrame {
         fileMenu.add(saveItem);
         //Add file menu to menu bar
         menuBar.add(fileMenu);
+
+        //Create edit menu
+        JMenu editMenu = new JMenu("Edit");
+        //Create edit menu items
+        JMenuItem undoItem = new JMenuItem("Undo");
+        //Add functionality to items
+        undoItem.addActionListener(new ButtonListener());
+        //Add edit menu items to menu
+        editMenu.add(undoItem);
+        //Add edit menu to menu bar
+        menuBar.add(editMenu);
+
         //Create tool menu
         JMenu toolMenu = new JMenu("Tools");
         //Create tool menu items
@@ -137,6 +149,11 @@ public class GUI extends JFrame {
                 int panelWidth = drawingPanel.getSize().width;
                 Graphics g = drawingPanel.getGraphics();
                 g.clearRect(0,0,panelWidth,panelHeight);
+            }
+            else if(buttonString.equals("Undo")) {
+                drawnShapes.remove(drawnShapes.size()-1);
+                RedrawVectors redrawPanel = new RedrawVectors(drawnShapes, drawingPanel);
+                redrawPanel.redraw();
             }
             else if(buttonString.equals("None")) {
                 drawnShapes.add("FILL OFF");
