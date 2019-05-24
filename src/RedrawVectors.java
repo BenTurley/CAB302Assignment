@@ -8,7 +8,9 @@ public class RedrawVectors {
     private ArrayList<String> vectorArray;
     private ArrayList<Double> VectorCords = new ArrayList<>();
     private JPanel drawingPanel;
-    private String colour = "";
+    private String penColour = "#000000";
+    private Color currentColour = Color.black;
+    private String fillColour = "";
 
 
     public RedrawVectors(ArrayList<String> vectorArray, JPanel drawingPanel) {
@@ -24,7 +26,7 @@ public class RedrawVectors {
         Graphics g = drawingPanel.getGraphics();
         g.clearRect(0,0,panelWidth,panelHeight);
 
-        String baseRegex = "(LINE|RECTANGLE|PLOT|OVAL|FILL) ([0-9. ]+|#[A-FO0-9]+|OFF)";
+        String baseRegex = "(LINE|RECTANGLE|PLOT|OVAL|FILL|PEN) ([0-9. ]+|#[A-FO0-9]+|OFF)";
         Pattern basePattern = Pattern.compile(baseRegex);
         for(int x = 0; x < vectorArray.size(); x++) {
             System.out.println("Iteration: " + x);
@@ -56,13 +58,13 @@ public class RedrawVectors {
                 else if(matcher.group(1).equals("RECTANGLE")) {
                     VectorScale rectangleScale = new VectorScale(Double.valueOf(split[0]),Double.valueOf(split[1]), Double.valueOf(split[2]),Double.valueOf(split[3]), drawingPanel);
                     Vector rectangle = new RectangleVector(rectangleScale.x1(), rectangleScale.y1(), rectangleScale.x2(), rectangleScale.y2(), drawingPanel);
-                    //if(colour == ""){
+                    //if(fillColour == ""){
 
-                    if(colour.equals("")) {
+                    if(fillColour.equals("")) {
                         rectangle.DrawVector();
                     }
                     else{
-                        ((RectangleVector) rectangle).FillVector(colour);
+                        ((RectangleVector) rectangle).FillVector(fillColour);
                         rectangle.DrawVector();
                     }
 
@@ -77,14 +79,31 @@ public class RedrawVectors {
                     Vector plot = new PlotVector(plotScale.x1(), plotScale.y1(), drawingPanel);
                     plot.DrawVector();
                 }
-                else if(matcher.group(1).equals("FILL")) {
-                    colour = split[0];
-                    System.out.println(colour);
-                    if(colour.equals("OFF")) {
-                        colour = "";
+                else if(matcher.group(1).equals("PEN")) {
+                    penColour = split[0];
+                    System.out.println("String penColour is: " + penColour);
+                    if(penColour.equals("#000000")) {
+                        System.out.println("#000000");
+                        currentColour = Color.black;
+                    }
+                    else if(penColour.equals("#FF0000")) {
+                        System.out.println("#FF0000");
+                        currentColour = Color.red;
+                    }
+                    else if(penColour.equals("#0000FF")) {
+                        System.out.println("#0000FF");
+                        currentColour = Color.blue;
                     }
 
+                    g.setColor(currentColour);
 
+                }
+                else if(matcher.group(1).equals("FILL")) {
+                    fillColour = split[0];
+                    System.out.println(fillColour);
+                    if(fillColour.equals("OFF")) {
+                        fillColour = "";
+                    }
                     System.out.println("FILL: " + split[0]);
                 }
 

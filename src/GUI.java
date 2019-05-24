@@ -82,21 +82,38 @@ public class GUI extends JFrame {
         //Add tool menu to menu bar
         menuBar.add(toolMenu);
 
-        //Create colour menu
+        //Create pen colour menu
+        JMenuItem penColourMenu = new JMenu("Pen");
+        //Create pen colour menu items
+        JMenuItem blackPen = new JMenuItem("Black");
+        JMenuItem redPen = new JMenuItem("Red");
+        JMenuItem bluePen = new JMenuItem("Blue");
+        //Add functionality to pen items
+        blackPen.addActionListener(new ButtonListener());
+        redPen.addActionListener(new ButtonListener());
+        bluePen.addActionListener(new ButtonListener());
+        //Add pen colour menu items to menu
+        penColourMenu.add(blackPen);
+        penColourMenu.add(redPen);
+        penColourMenu.add(bluePen);
+        //Add pen colour menu to menubar
+        menuBar.add(penColourMenu);
+
+        //Create fill colour menu
         JMenu fillColourMenu = new JMenu("Fill");
-        //Create colour menu items
+        //Create fill colour menu items
         JMenuItem noFill = new JMenuItem("None");
         JMenuItem gray = new JMenuItem("Gray");
         JMenuItem red = new JMenuItem("Red");
-        //Add functionality to tools
+        //Add functionality to fill items
         noFill.addActionListener(new ButtonListener());
         gray.addActionListener(new ButtonListener());
         red.addActionListener(new ButtonListener());
-        //Add colour menu items to menu
+        //Add fill colour menu items to menu
         fillColourMenu.add(noFill);
         fillColourMenu.add(gray);
         fillColourMenu.add(red);
-        //Add colour menu to menu bar
+        //Add fill colour menu to menu bar
         menuBar.add(fillColourMenu);
 
 
@@ -155,6 +172,18 @@ public class GUI extends JFrame {
                 RedrawVectors redrawPanel = new RedrawVectors(drawnShapes, drawingPanel);
                 redrawPanel.redraw();
             }
+            //Pen
+            else if(buttonString.equals("Black")) {
+                drawnShapes.add("PEN #000000");
+            }
+            else if(buttonString.equals("Red")) {
+                drawnShapes.add("PEN #FF0000");
+            }
+            else if(buttonString.equals("Blue")) {
+                drawnShapes.add("PEN #0000FF");
+            }
+
+            //Fill
             else if(buttonString.equals("None")) {
                 drawnShapes.add("FILL OFF");
                 colour = "";

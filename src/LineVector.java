@@ -17,10 +17,9 @@ public class LineVector implements Vector {
         this.panel = panel;
     }
 
-    @Override
+
     public void DrawVector() {
         Graphics g = panel.getGraphics();
-
         g.drawLine((int) x1,(int)y1,(int)x2,(int)y2);
 
     }
