@@ -255,10 +255,10 @@ public class GUI extends JFrame {
 
                 Oval.DrawVector();
                 if(!colour.equals("")) {
-                    Oval.DrawVector();
+                    ((OvalVector) Oval).FillVector(colour);
                 }
                 else{
-                    ((OvalVector) Oval).FillVector(colour);
+                    Oval.DrawVector();
                 }
                 drawnShapes.add(Oval.VectorOutputFormatted());
                 System.out.println(drawnShapes);
