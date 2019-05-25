@@ -153,7 +153,19 @@ public class GUI extends JFrame {
                 drawnShapes.add("PEN #0000FF");
             }
             else if(buttonString.equals("Custom")){
-                JOptionPane.showInputDialog(drawingPanel, "Enter hexadecimal value for Pen");
+                String userColourInput = JOptionPane.showInputDialog(drawingPanel, "Enter hexadecimal value for Pen");
+                System.out.println(userColourInput);
+                //Validate string is valid hexadecimal colour
+                String regex = "([#]?)([A-F0-9]{6}|[a-f0-9]{6})";
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(userColourInput);
+                //If a valid hex colour value is found
+                if(matcher.find()) {
+                    drawnShapes.add("PEN #" + matcher.group(2));
+                }
+                else {
+                    JOptionPane.showMessageDialog(drawingPanel, "Invalid hexadecimal value");
+                }
             }
         }
     }
