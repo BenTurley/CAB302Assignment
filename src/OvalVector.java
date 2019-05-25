@@ -37,7 +37,7 @@ public class OvalVector implements Vector{
         this.localColour = colour;
     }
 
-    @Override
+
     public void DrawVector() {
         int xDiff = (int) Math.abs(x2-x1);
         int yDiff = (int) Math.abs(y2-y1);
@@ -55,6 +55,33 @@ public class OvalVector implements Vector{
         }
 
         Graphics g = panel.getGraphics();
+        g.setColor(localColour);
+        g.drawOval((int) x1,(int)y1,xDiff,yDiff);
+    }
+
+    public void FillVector(String colour) {
+        int xDiff = (int) Math.abs(x2-x1);
+        int yDiff = (int) Math.abs(y2-y1);
+
+        if((this.x1 > this.x2) && (this.y1 <= this.y2)){
+            xSwap();
+        }
+
+        else if((this.x1 <= this.x2) && (this.y1 > this.y2)){
+            ySwap();
+        }
+        else if((this.x1 > this.x2) && (this.y1 > this.y2)){
+            ySwap();
+            xSwap();
+        }
+
+        System.out.println("FillVector set colour to: " + colour);
+        Graphics g = panel.getGraphics();
+        g.setColor(Color.decode(colour));
+        System.out.println("FillVector set colour to: " + colour);
+
+        g.fillOval((int) x1,(int)y1,xDiff,yDiff);
+        //Draw outline
         g.setColor(localColour);
         g.drawOval((int) x1,(int)y1,xDiff,yDiff);
     }
