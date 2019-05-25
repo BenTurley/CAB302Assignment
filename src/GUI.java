@@ -244,7 +244,14 @@ public class GUI extends JFrame {
             }
             else if(tool == "Oval"){
                 Vector Oval  = new OvalVector(this.x1, this.y1, this.x2, this.y2, drawingPanel);
+
                 Oval.DrawVector();
+                if(!colour.equals("")) {
+                    Oval.DrawVector();
+                }
+                else{
+                    ((OvalVector) Oval).FillVector(colour);
+                }
                 drawnShapes.add(Oval.VectorOutputFormatted());
                 System.out.println(drawnShapes);
             }
