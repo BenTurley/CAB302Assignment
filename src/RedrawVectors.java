@@ -75,8 +75,16 @@ public class RedrawVectors {
                 else if(matcher.group(1).equals("OVAL")) {
                     VectorScale ovalScale = new VectorScale(Double.valueOf(split[0]),Double.valueOf(split[1]), Double.valueOf(split[2]),Double.valueOf(split[3]), drawingPanel);
                     Vector oval = new OvalVector(ovalScale.x1(), ovalScale.y1(), ovalScale.x2(), ovalScale.y2(), drawingPanel);
-                    oval.SetColour(currentColour);
-                    oval.DrawVector();
+
+                    if(fillColour.equals("")) {
+                        oval.SetColour(currentColour);
+                        oval.DrawVector();
+                    }
+                    else{
+                        ((OvalVector) oval).FillVector(fillColour);
+                        oval.SetColour(currentColour);
+                        oval.DrawVector();
+                    }
                 }
                 else if(matcher.group(1).equals("PLOT")) {
                     VectorScale plotScale = new VectorScale(Double.valueOf(split[0]),Double.valueOf(split[1]), Double.valueOf(split[0]), Double.valueOf(split[1]), drawingPanel);
