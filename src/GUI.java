@@ -88,16 +88,21 @@ public class GUI extends JFrame {
         JMenuItem blackPen = new JMenuItem("Black");
         JMenuItem redPen = new JMenuItem("Red");
         JMenuItem bluePen = new JMenuItem("Blue");
+        JMenuItem customPen = new JMenuItem("Custom");
         //Add functionality to pen items
         blackPen.addActionListener(new PenButtonListener());
         redPen.addActionListener(new PenButtonListener());
         bluePen.addActionListener(new PenButtonListener());
+        customPen.addActionListener(new PenButtonListener());
         //Add pen colour menu items to menu
         penColourMenu.add(blackPen);
         penColourMenu.add(redPen);
         penColourMenu.add(bluePen);
+        penColourMenu.add(customPen);
         //Add pen colour menu to menu bar
         menuBar.add(penColourMenu);
+
+        //Create pen input for hex values
 
         //Create fill colour menu
         JMenu fillColourMenu = new JMenu("Fill");
@@ -146,6 +151,9 @@ public class GUI extends JFrame {
             }
             else if(buttonString.equals("Blue")) {
                 drawnShapes.add("PEN #0000FF");
+            }
+            else if(buttonString.equals("Custom")){
+                JOptionPane.showInputDialog(drawingPanel, "Enter hexadecimal value for Pen");
             }
         }
     }
