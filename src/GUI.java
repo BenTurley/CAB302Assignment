@@ -110,14 +110,17 @@ public class GUI extends JFrame {
         JMenuItem noFill = new JMenuItem("None");
         JMenuItem gray = new JMenuItem("Gray");
         JMenuItem red = new JMenuItem("Red");
+        JMenuItem customFill = new JMenuItem("Custom");
         //Add functionality to fill items
         noFill.addActionListener(new ButtonListener());
         gray.addActionListener(new ButtonListener());
         red.addActionListener(new ButtonListener());
+        customFill.addActionListener(new ButtonListener());
         //Add fill colour menu items to menu
         fillColourMenu.add(noFill);
         fillColourMenu.add(gray);
         fillColourMenu.add(red);
+        fillColourMenu.add(customFill);
         //Add fill colour menu to menu bar
         menuBar.add(fillColourMenu);
 
@@ -219,6 +222,22 @@ public class GUI extends JFrame {
             else if(buttonString.equals("Red")) {
                 drawnShapes.add("FILL #FF0000");
                 colour = "#FF0000";
+            }
+            else if(buttonString.equals("Custom")){
+                String userColourInput = JOptionPane.showInputDialog(drawingPanel, "Enter hexadecimal value for Fill");
+                System.out.println(userColourInput);
+                //Validate string is valid hexadecimal colour
+                String regex = "([#]?)([A-F0-9]{6}|[a-f0-9]{6})";
+                Pattern pattern = Pattern.compile(regex);
+                Matcher matcher = pattern.matcher(userColourInput);
+                //If a valid hex colour value is found
+                if(matcher.find()) {
+                    drawnShapes.add("FILL #" + matcher.group(2));
+                    colour = "#" +  matcher.group(2);
+                }
+                else {
+                    JOptionPane.showMessageDialog(drawingPanel, "Invalid hexadecimal value");
+                }
             }
         }
 
