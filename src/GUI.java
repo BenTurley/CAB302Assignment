@@ -156,19 +156,26 @@ public class GUI extends JFrame {
                 drawnShapes.add("PEN #0000FF");
             }
             else if(buttonString.equals("Custom")){
-                String userColourInput = JOptionPane.showInputDialog(drawingPanel, "Enter hexadecimal value for Pen");
-                System.out.println(userColourInput);
-                //Validate string is valid hexadecimal colour
-                String regex = "([#]?)([A-F0-9]{6}|[a-f0-9]{6})";
-                Pattern pattern = Pattern.compile(regex);
-                Matcher matcher = pattern.matcher(userColourInput);
-                //If a valid hex colour value is found
-                if(matcher.find()) {
-                    drawnShapes.add("PEN #" + matcher.group(2));
+                try {
+                    String userColourInput = JOptionPane.showInputDialog(drawingPanel, "Enter hexadecimal value for Pen");
+                    System.out.println(userColourInput);
+                    //Validate string is valid hexadecimal colour
+                    String regex = "([#]?)([A-F0-9]{6}|[a-f0-9]{6})";
+                    Pattern pattern = Pattern.compile(regex);
+                    Matcher matcher = pattern.matcher(userColourInput);
+                    //If a valid hex colour value is found
+                    if(matcher.find()) {
+                        drawnShapes.add("PEN #" + matcher.group(2));
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(drawingPanel, "Invalid hexadecimal value");
+                    }
                 }
-                else {
+                catch (NullPointerException e) {
+                    System.out.println("Caught NullPointerException reading hex colour code");
                     JOptionPane.showMessageDialog(drawingPanel, "Invalid hexadecimal value");
                 }
+
             }
         }
     }
@@ -224,18 +231,24 @@ public class GUI extends JFrame {
                 colour = "#FF0000";
             }
             else if(buttonString.equals("Custom")){
-                String userColourInput = JOptionPane.showInputDialog(drawingPanel, "Enter hexadecimal value for Fill");
-                System.out.println(userColourInput);
-                //Validate string is valid hexadecimal colour
-                String regex = "([#]?)([A-F0-9]{6}|[a-f0-9]{6})";
-                Pattern pattern = Pattern.compile(regex);
-                Matcher matcher = pattern.matcher(userColourInput);
-                //If a valid hex colour value is found
-                if(matcher.find()) {
-                    drawnShapes.add("FILL #" + matcher.group(2));
-                    colour = "#" +  matcher.group(2);
+                try {
+                    String userColourInput = JOptionPane.showInputDialog(drawingPanel, "Enter hexadecimal value for Fill");
+                    System.out.println(userColourInput);
+                    //Validate string is valid hexadecimal colour
+                    String regex = "([#]?)([A-F0-9]{6}|[a-f0-9]{6})";
+                    Pattern pattern = Pattern.compile(regex);
+                    Matcher matcher = pattern.matcher(userColourInput);
+                    //If a valid hex colour value is found
+                    if(matcher.find()) {
+                        drawnShapes.add("FILL #" + matcher.group(2));
+                        colour = "#" +  matcher.group(2);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(drawingPanel, "Invalid hexadecimal value");
+                    }
                 }
-                else {
+                catch (NullPointerException e) {
+                    System.out.println("Caught NullPointerException reading hex colour code");
                     JOptionPane.showMessageDialog(drawingPanel, "Invalid hexadecimal value");
                 }
             }
