@@ -280,8 +280,14 @@ public class GUI extends JFrame {
                     }
                 }
                 else if(e.getButton() == MouseEvent.BUTTON3){
-                    polygon.FillVector("RED");
+                    if(!colour.equals("")) {
+                        polygon.FillVector(colour);
+                    }
+                    else{
+                        polygon.DrawVector();
+                    }
                     System.out.println(polygon.VectorOutputFormatted());
+                    drawnShapes.add(polygon.VectorOutputFormatted());
                     this.polygon = new PolygonVector(drawingPanel);
                 }
             }
