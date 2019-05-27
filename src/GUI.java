@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -69,16 +70,19 @@ public class GUI extends JFrame {
         JMenuItem rectangleItem = new JMenuItem("Rectangle");
         JMenuItem plotItem = new JMenuItem("Plot");
         JMenuItem OvalItem = new JMenuItem("Oval");
+        JMenuItem PolygonItem = new JMenuItem("Polygon");
         //Add functionality to tools
         lineItem.addActionListener(new ButtonListener());
         rectangleItem.addActionListener(new ButtonListener());
         plotItem.addActionListener(new ButtonListener());
         OvalItem.addActionListener(new ButtonListener());
+        PolygonItem.addActionListener(new ButtonListener());
         //Add tool menu items to menu
         toolMenu.add(lineItem);
         toolMenu.add(rectangleItem);
         toolMenu.add(plotItem);
         toolMenu.add(OvalItem);
+        toolMenu.add(PolygonItem);
         //Add tool menu to menu bar
         menuBar.add(toolMenu);
 
@@ -185,7 +189,9 @@ public class GUI extends JFrame {
         private double y1;
         private double x2;
         private double y2;
+        private PolygonVector polygon = new PolygonVector(drawingPanel);
 
+//        boolean polygonInit = false;
 
 
 
@@ -203,6 +209,9 @@ public class GUI extends JFrame {
             }
             else if(buttonString.equals("Plot")) {
                 tool = "Plot";
+            }
+            else if(buttonString.equals("Polygon")) {
+                tool = "Polygon";
             }
             else if(buttonString.equals("New")) {
                 drawnShapes.clear();
@@ -256,6 +265,26 @@ public class GUI extends JFrame {
 
         public void mouseClicked(MouseEvent e) {
             //Do nothing
+
+            if(tool == "Polygon"){
+                if(e.getButton() == MouseEvent.BUTTON1){
+                    if(polygon.PolygonInitialised() == false){
+                        this.x1 = (e.getX());
+                        this.y1 = (e.getY());
+                        polygon.PolygonInitialise(x1, y1);
+                    }
+                    else{
+                        this.x2 = (e.getX());
+                        this.y2 = (e.getY());
+                        polygon.AddSide(x2, y2);
+                    }
+                }
+                else if(e.getButton() == MouseEvent.BUTTON3){
+                    polygon.FillVector("RED");
+                    System.out.println(polygon.VectorOutputFormatted());
+                    this.polygon = new PolygonVector(drawingPanel);
+                }
+            }
         }
 
         public void mousePressed(MouseEvent e) {
