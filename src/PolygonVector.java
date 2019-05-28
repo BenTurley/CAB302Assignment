@@ -23,6 +23,15 @@ public class PolygonVector implements Vector {
         totalPoints = 1;
     }
 
+    public boolean ValidSides(){
+        if(totalPoints < 3){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+
     private void Redraw(){
         for(int i = 1; i < this.xPoints.size() ; i++){
             int x1 = (int) (this.xPoints.get(i - 1) * panel.getSize().width);
@@ -55,8 +64,10 @@ public class PolygonVector implements Vector {
         Polygon poly = new Polygon(xPoints, yPoints, totalPoints);
 
         Graphics g = panel.getGraphics();
+
         g.setColor(Color.decode(colour));
         g.fillPolygon(poly);
+
         g.setColor(localColour);
         g.drawPolygon(poly);
     }
@@ -110,10 +121,7 @@ public class PolygonVector implements Vector {
     @Override
     public String VectorOutputFormatted() {
         DecimalFormat df = new DecimalFormat("0.00");
-
         String polygonString = "POLYGON";
-        double panelHeight = panel.getSize().height;
-        double panelWidth = panel.getSize().width;
 
         for (int i = 0; i < totalPoints; i++){
             double convertedX1 = this.xPoints.get(i);
