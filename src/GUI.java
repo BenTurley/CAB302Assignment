@@ -280,15 +280,28 @@ public class GUI extends JFrame {
                     }
                 }
                 else if(e.getButton() == MouseEvent.BUTTON3){
-                    if(!colour.equals("")) {
-                        polygon.FillVector(colour);
+                    try{
+                        if(polygon.ValidSides() == false){
+                            throw new Exception("Sides must be greater than 2");
+                        }
+                        if(!colour.equals("")) {
+                            polygon.FillVector(colour);
+                        }
+                        else{
+                            polygon.DrawVector();
+                        }
+                        System.out.println(polygon.VectorOutputFormatted());
+                        drawnShapes.add(polygon.VectorOutputFormatted());
+                        this.polygon = new PolygonVector(drawingPanel);
                     }
-                    else{
-                        polygon.DrawVector();
+                    catch (Exception f){
+                        JOptionPane.showMessageDialog(drawingPanel, "Invalid amount of polygon sides");
+                        this.polygon = new PolygonVector(drawingPanel);
+                        //System.out.println("Error");
+                        System.out.println(f.getMessage());
                     }
-                    System.out.println(polygon.VectorOutputFormatted());
-                    drawnShapes.add(polygon.VectorOutputFormatted());
-                    this.polygon = new PolygonVector(drawingPanel);
+
+
                 }
             }
         }
