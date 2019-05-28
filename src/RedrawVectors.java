@@ -98,8 +98,17 @@ public class RedrawVectors {
 
                     }
                     polygon.AddSide(polygonScale.customScaleX(Double.valueOf(split[0])),polygonScale.customScaleY(Double.valueOf(split[1])));
-                    polygon.VectorOutputFormatted();
-                    polygon.DrawVector();
+                    //polygon.VectorOutputFormatted();
+
+                    if (fillColour.equals("")) {
+                        polygon.SetColour(currentColour);
+                        polygon.DrawVector();
+                    }
+                    else {
+                        polygon.FillVector(fillColour);
+                        polygon.SetColour(currentColour);
+                        polygon.DrawVector();
+                    }
                 }
                 else if(matcher.group(1).equals("PLOT")) {
                     VectorScale plotScale = new VectorScale(Double.valueOf(split[0]),Double.valueOf(split[1]), Double.valueOf(split[0]), Double.valueOf(split[1]), drawingPanel);
