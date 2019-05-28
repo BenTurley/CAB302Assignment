@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.text.DecimalFormat;
 
-public class OvalVector implements Vector{
+public class EllipseVector implements Vector{
     private double x1;
     private double y1;
     private double x2;
@@ -10,7 +10,7 @@ public class OvalVector implements Vector{
     private JPanel panel;
     private Color localColour;
 
-    public OvalVector(double x1, double y1, double x2, double y2, JPanel panel){
+    public EllipseVector(double x1, double y1, double x2, double y2, JPanel panel){
         this.x1 = x1;
         this.y1 = y1;
         this.x2 = x2;
@@ -114,6 +114,6 @@ public class OvalVector implements Vector{
         //System.out.println(formattedY1);
         //System.out.println(formattedX2);
         //System.out.println(formattedY2);
-        return "OVAL " + formattedX1 + " " + formattedY1 + " " + formattedX2 + " " + formattedY2;
+        return "ELLIPSE " + formattedX1 + " " + formattedY1 + " " + formattedX2 + " " + formattedY2;
     }
 }

@@ -7,7 +7,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -69,19 +68,19 @@ public class GUI extends JFrame {
         JMenuItem lineItem = new JMenuItem("Line");
         JMenuItem rectangleItem = new JMenuItem("Rectangle");
         JMenuItem plotItem = new JMenuItem("Plot");
-        JMenuItem OvalItem = new JMenuItem("Oval");
+        JMenuItem EllipseItem = new JMenuItem("Ellipse");
         JMenuItem PolygonItem = new JMenuItem("Polygon");
         //Add functionality to tools
         lineItem.addActionListener(new ButtonListener());
         rectangleItem.addActionListener(new ButtonListener());
         plotItem.addActionListener(new ButtonListener());
-        OvalItem.addActionListener(new ButtonListener());
+        EllipseItem.addActionListener(new ButtonListener());
         PolygonItem.addActionListener(new ButtonListener());
         //Add tool menu items to menu
         toolMenu.add(lineItem);
         toolMenu.add(rectangleItem);
         toolMenu.add(plotItem);
-        toolMenu.add(OvalItem);
+        toolMenu.add(EllipseItem);
         toolMenu.add(PolygonItem);
         //Add tool menu to menu bar
         menuBar.add(toolMenu);
@@ -204,8 +203,8 @@ public class GUI extends JFrame {
             else if(buttonString.equals("Line")){
                 tool = "Line";
             }
-            else if(buttonString.equals("Oval")) {
-                tool = "Oval";
+            else if(buttonString.equals("Ellipse")) {
+                tool = "Ellipse";
             }
             else if(buttonString.equals("Plot")) {
                 tool = "Plot";
@@ -342,17 +341,17 @@ public class GUI extends JFrame {
                 drawnShapes.add(line.VectorOutputFormatted());
                 System.out.println(drawnShapes);
             }
-            else if(tool == "Oval"){
-                Vector Oval  = new OvalVector(this.x1, this.y1, this.x2, this.y2, drawingPanel);
+            else if(tool == "Ellipse"){
+                Vector Ellipse  = new EllipseVector(this.x1, this.y1, this.x2, this.y2, drawingPanel);
 
-                Oval.DrawVector();
+                Ellipse.DrawVector();
                 if(!colour.equals("")) {
-                    ((OvalVector) Oval).FillVector(colour);
+                    ((EllipseVector) Ellipse).FillVector(colour);
                 }
                 else{
-                    Oval.DrawVector();
+                    Ellipse.DrawVector();
                 }
-                drawnShapes.add(Oval.VectorOutputFormatted());
+                drawnShapes.add(Ellipse.VectorOutputFormatted());
                 System.out.println(drawnShapes);
             }
             RedrawVectors redrawPanel = new RedrawVectors(drawnShapes, drawingPanel);

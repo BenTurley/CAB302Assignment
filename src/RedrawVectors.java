@@ -26,7 +26,7 @@ public class RedrawVectors {
         Graphics g = drawingPanel.getGraphics();
         g.clearRect(0,0,panelWidth,panelHeight);
 
-        String baseRegex = "(LINE|RECTANGLE|PLOT|OVAL|FILL|PEN) ([0-9. ]+|#[A-FO0-9]+|OFF)";
+        String baseRegex = "(LINE|RECTANGLE|PLOT|ELLIPSE|FILL|PEN) ([0-9. ]+|#[A-FO0-9]+|OFF)";
         Pattern basePattern = Pattern.compile(baseRegex);
         for(int x = 0; x < vectorArray.size(); x++) {
             System.out.println("Iteration: " + x);
@@ -72,16 +72,16 @@ public class RedrawVectors {
                     }
 
                 }
-                else if(matcher.group(1).equals("OVAL")) {
+                else if(matcher.group(1).equals("ELLIPSE")) {
                     VectorScale ovalScale = new VectorScale(Double.valueOf(split[0]),Double.valueOf(split[1]), Double.valueOf(split[2]),Double.valueOf(split[3]), drawingPanel);
-                    Vector oval = new OvalVector(ovalScale.x1(), ovalScale.y1(), ovalScale.x2(), ovalScale.y2(), drawingPanel);
+                    Vector oval = new EllipseVector(ovalScale.x1(), ovalScale.y1(), ovalScale.x2(), ovalScale.y2(), drawingPanel);
 
                     if(fillColour.equals("")) {
                         oval.SetColour(currentColour);
                         oval.DrawVector();
                     }
                     else{
-                        ((OvalVector) oval).FillVector(fillColour);
+                        ((EllipseVector) oval).FillVector(fillColour);
                         oval.SetColour(currentColour);
                         oval.DrawVector();
                     }
