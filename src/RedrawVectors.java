@@ -26,7 +26,7 @@ public class RedrawVectors {
         Graphics g = drawingPanel.getGraphics();
         g.clearRect(0,0,panelWidth,panelHeight);
 
-        String baseRegex = "(LINE|RECTANGLE|PLOT|ELLIPSE|FILL|PEN) ([0-9. ]+|#[A-FO0-9]+|OFF)";
+        String baseRegex = "(LINE|RECTANGLE|PLOT|ELLIPSE|FILL|PEN|POLYGON) ([0-9. ]+|#[A-FO0-9]+|OFF)";
         Pattern basePattern = Pattern.compile(baseRegex);
         for(int x = 0; x < vectorArray.size(); x++) {
             System.out.println("Iteration: " + x);
@@ -73,18 +73,33 @@ public class RedrawVectors {
 
                 }
                 else if(matcher.group(1).equals("ELLIPSE")) {
-                    VectorScale ovalScale = new VectorScale(Double.valueOf(split[0]),Double.valueOf(split[1]), Double.valueOf(split[2]),Double.valueOf(split[3]), drawingPanel);
-                    Vector oval = new EllipseVector(ovalScale.x1(), ovalScale.y1(), ovalScale.x2(), ovalScale.y2(), drawingPanel);
+                    VectorScale ellipseScale = new VectorScale(Double.valueOf(split[0]),Double.valueOf(split[1]), Double.valueOf(split[2]),Double.valueOf(split[3]), drawingPanel);
+                    Vector ellipse = new EllipseVector(ellipseScale.x1(), ellipseScale.y1(), ellipseScale.x2(), ellipseScale.y2(), drawingPanel);
 
                     if(fillColour.equals("")) {
-                        oval.SetColour(currentColour);
-                        oval.DrawVector();
+                        ellipse.SetColour(currentColour);
+                        ellipse.DrawVector();
                     }
                     else{
-                        ((EllipseVector) oval).FillVector(fillColour);
-                        oval.SetColour(currentColour);
-                        oval.DrawVector();
+                        ((EllipseVector) ellipse).FillVector(fillColour);
+                        ellipse.SetColour(currentColour);
+                        ellipse.DrawVector();
                     }
+                }
+                else if(matcher.group(1).equals("POLYGON")) {
+                    VectorScale polygonScale = new VectorScale(Double.valueOf(split[0]), Double.valueOf(split[1]), Double.valueOf(split[2]), Double.valueOf(split[3]), drawingPanel);
+                    PolygonVector polygon = new PolygonVector(drawingPanel);
+                    polygon.PolygonInitialise(polygonScale.customScaleX(Double.valueOf(split[0])), polygonScale.customScaleY(Double.valueOf(split[1])));
+                    System.out.println("Redraw polygon found: " + matcher.group(2));
+                    System.out.println("Redraw polygon found this many points: " + split.length);
+                    for(int i = 0; i < (split.length / 2); i++) {
+                        System.out.println("Redraw adding side " + (i+1));
+                        //polygon.AddSide(Double.valueOf(split[(2+i)]),Double.valueOf(split[(3+i)]));
+                        polygon.AddSide(polygonScale.customScaleX(Double.valueOf(split[(2+i)])),polygonScale.customScaleY(Double.valueOf(split[(3+i)])));
+                        System.out.println("Added: " + Double.valueOf(split[(2+i)]) + " " + Double.valueOf(split[(3+i)]));
+                    }
+                    polygon.VectorOutputFormatted();
+                    polygon.DrawVector();
                 }
                 else if(matcher.group(1).equals("PLOT")) {
                     VectorScale plotScale = new VectorScale(Double.valueOf(split[0]),Double.valueOf(split[1]), Double.valueOf(split[0]), Double.valueOf(split[1]), drawingPanel);

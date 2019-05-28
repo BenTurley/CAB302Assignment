@@ -35,4 +35,12 @@ public class VectorScale {
     public double y2(){
         return y2 * panelHeight;
     }
+
+    public double customScaleX(double x) {
+        return x * panelWidth;
+    }
+
+    public double customScaleY(double y) {
+        return y * panelHeight;
+    }
 }

@@ -16,6 +16,7 @@ public class PolygonVector implements Vector {
         this.panel = panel;
     }
 
+
     public void PolygonInitialise(double x1, double y1){
         xPoints.add(x1 / panel.getSize().width);
         yPoints.add(y1 / panel.getSize().height);
