@@ -92,12 +92,12 @@ public class RedrawVectors {
                     polygon.PolygonInitialise(polygonScale.customScaleX(Double.valueOf(split[0])), polygonScale.customScaleY(Double.valueOf(split[1])));
                     System.out.println("Redraw polygon found: " + matcher.group(2));
                     System.out.println("Redraw polygon found this many points: " + split.length);
-                    for(int i = 0; i < (split.length / 2); i++) {
-                        System.out.println("Redraw adding side " + (i+1));
+                    for(int i = 0; i < ((split.length-2) / 2); i++) {
                         //polygon.AddSide(Double.valueOf(split[(2+i)]),Double.valueOf(split[(3+i)]));
-                        polygon.AddSide(polygonScale.customScaleX(Double.valueOf(split[(2+i)])),polygonScale.customScaleY(Double.valueOf(split[(3+i)])));
-                        System.out.println("Added: " + Double.valueOf(split[(2+i)]) + " " + Double.valueOf(split[(3+i)]));
+                        polygon.AddSide(polygonScale.customScaleX(Double.valueOf(split[(2+(2*i))])),polygonScale.customScaleY(Double.valueOf(split[(3+(2*i))])));
+
                     }
+                    polygon.AddSide(polygonScale.customScaleX(Double.valueOf(split[0])),polygonScale.customScaleY(Double.valueOf(split[1])));
                     polygon.VectorOutputFormatted();
                     polygon.DrawVector();
                 }
