@@ -412,6 +412,16 @@ public class GUI extends JFrame {
                 if(choice == JFileChooser.APPROVE_OPTION) {
                     System.out.println("Opened: " + fileChooser.getSelectedFile().getAbsolutePath());
 
+                    drawnShapes.clear();
+                    FileReaderWriter openedFile = new FileReaderWriter(fileChooser.getSelectedFile().getAbsolutePath(), "");
+                    ArrayList fileContents = openedFile.ReadFile();
+                    drawnShapes = fileContents;
+                    System.out.println(fileContents);
+                    RedrawVectors drawPanel = new RedrawVectors(fileContents, drawingPanel);
+                    drawPanel.redraw();
+
+
+                    /*
                     //#Regular expressions
                     String regex = "(LINE |RECTANGLE )([0-9.]+) ([0-9.]+) ([0-9.]+) ([0-9.]+)";
                     Pattern pattern = Pattern.compile(regex);
@@ -465,6 +475,7 @@ public class GUI extends JFrame {
                             }
                         }
                     }
+                     */
                 }
                 else {
                     //Set display label to say user cancelled
