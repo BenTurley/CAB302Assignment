@@ -211,6 +211,7 @@ public class GUI extends JFrame {
             }
             else if(buttonString.equals("Polygon")) {
                 tool = "Polygon";
+                JOptionPane.showMessageDialog(drawingPanel, "Left mouse click to place a point.\nRight mouse click to finish polygon.");
             }
             else if(buttonString.equals("New")) {
                 drawnShapes.clear();
