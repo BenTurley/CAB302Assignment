@@ -1,3 +1,4 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
@@ -6,7 +7,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -37,17 +42,20 @@ public class GUI extends JFrame {
         JMenuItem newItem = new JMenuItem("New");
         JMenuItem openItem = new JMenuItem("Open");
         JMenuItem saveItem = new JMenuItem("Save");
+        JMenuItem saveBMP = new JMenuItem("Save as BMP");
         //Add functionality to menu items
         fileChooser vecFileChooser = new fileChooser();
         //Add action listeners to buttons
         newItem.addActionListener(new ButtonListener());
         openItem.addActionListener(vecFileChooser);
         saveItem.addActionListener(vecFileChooser);
+        saveBMP.addActionListener(new ButtonListener());
 
         //Add file menu items to menu
         fileMenu.add(newItem);
         fileMenu.add(openItem);
         fileMenu.add(saveItem);
+        fileMenu.add(saveBMP);
         //Add file menu to menu bar
         menuBar.add(fileMenu);
 
@@ -55,10 +63,13 @@ public class GUI extends JFrame {
         JMenu editMenu = new JMenu("Edit");
         //Create edit menu items
         JMenuItem undoItem = new JMenuItem("Undo");
+        JMenuItem historyItem = new JMenuItem("History");
         //Add functionality to items
         undoItem.addActionListener(new ButtonListener());
+        historyItem.addActionListener(new ButtonListener());
         //Add edit menu items to menu
         editMenu.add(undoItem);
+        editMenu.add(historyItem);
         //Add edit menu to menu bar
         menuBar.add(editMenu);
 
@@ -226,6 +237,9 @@ public class GUI extends JFrame {
                 RedrawVectors redrawPanel = new RedrawVectors(drawnShapes, drawingPanel);
                 redrawPanel.redraw();
             }
+            else if(buttonString.equals("History")) {
+
+            }
             //Fill
             else if(buttonString.equals("None")) {
                 drawnShapes.add("FILL OFF");
@@ -260,6 +274,41 @@ public class GUI extends JFrame {
                     System.out.println("Caught NullPointerException reading hex colour code");
                     JOptionPane.showMessageDialog(drawingPanel, "Invalid hexadecimal value");
                 }
+            }
+            else if(buttonString.equals("Save as BMP")) {
+                int xDimension = 25;
+                int yDimension = 25;
+                JTextField xInput = new JTextField(5);
+                JTextField yInput = new JTextField(5);
+                JPanel optionMenu = new JPanel();
+                optionMenu.add(new JLabel("x: "));
+                optionMenu.add(xInput);
+                //optionMenu.add(Box.createHorizontalStrut(15));
+                optionMenu.add(new JLabel("y: "));
+                optionMenu.add(yInput);
+                int result = JOptionPane.showConfirmDialog(drawingPanel, optionMenu, "Enter X and Y dimensions for BMP", JOptionPane.OK_CANCEL_OPTION);
+                if(result == JOptionPane.OK_OPTION) {
+                    System.out.println("X: " + xInput.getText());
+                    System.out.println("Y: " + yInput.getText());
+                    xDimension = Integer.parseInt(xInput.getText());
+                    yDimension = Integer.parseInt(yInput.getText());
+                }
+
+                BufferedImage image = new BufferedImage(xDimension, yDimension, BufferedImage.TYPE_INT_ARGB);
+                drawingPanel.setVisible(true);
+
+                RedrawVectors redrawPanel = new RedrawVectors(drawnShapes, drawingPanel);
+                redrawPanel.redraw();
+                Graphics g = image.getGraphics();
+
+                redrawPanel.redraw();
+                drawingPanel.paint(g);
+                try {
+                    ImageIO.write(image, "png", new File("test.bmp"));
+                } catch (IOException exception) {
+                    System.out.println("IOException creating BMP");
+                }
+
             }
         }
 
