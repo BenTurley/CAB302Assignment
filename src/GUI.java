@@ -254,7 +254,10 @@ public class GUI extends JFrame {
                 g.clearRect(0,0,panelWidth,panelHeight);
             }
             else if(buttonString.equals("Undo")) {
-                drawnShapes.remove(drawnShapes.size()-1);
+                if(drawnShapes.size() > 0) {
+                    drawnShapes.remove(drawnShapes.size()-1);
+                }
+
                 RedrawVectors redrawPanel = new RedrawVectors(drawnShapes, drawingPanel);
                 redrawPanel.redraw();
             }
