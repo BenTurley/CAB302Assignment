@@ -2,6 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.text.DecimalFormat;
 
+/**
+ * Represents a line object
+ */
+
 public class LineVector implements Vector {
     private double x1;
     private double y1;
@@ -10,6 +14,14 @@ public class LineVector implements Vector {
     private JPanel panel;
     private Color localColour;
 
+    /**
+     * Initialises LineVector
+     * @param x1
+     * @param y1
+     * @param x2
+     * @param y2
+     * @param panel
+     */
     public LineVector(double x1, double y1, double x2, double y2, JPanel panel){
         this.x1 = x1;
         this.y1 = y1;
@@ -18,11 +30,17 @@ public class LineVector implements Vector {
         this.panel = panel;
     }
 
-
+    /**
+     * Sets LineVector colour
+     * @param colour
+     */
     public void SetColour(Color colour) {
         this.localColour = colour;
     }
 
+    /**
+     * Draws LineVector to panel
+     */
     public void DrawVector() {
         Graphics g = panel.getGraphics();
         g.setColor(localColour);
@@ -30,9 +48,12 @@ public class LineVector implements Vector {
 
     }
 
+    /**
+     * Returns a line string formatted with line coordinates
+     * @return formatted line command
+     */
     @Override
     public String VectorOutputFormatted() {
-        /* Make a class to handle this*/
         double panelHeight = panel.getSize().height;
         double panelWidth = panel.getSize().width;
 
@@ -47,16 +68,6 @@ public class LineVector implements Vector {
         String formattedY1 = df.format(convertedY1);
         String formattedX2 = df.format(convertedX2);
         String formattedY2 = df.format(convertedY2);
-
-        //System.out.println(convertedX1);
-        //System.out.println(convertedY1);
-        //System.out.println(convertedX2);
-        //System.out.println(convertedY2);
-
-        //System.out.println(formattedX1);
-        //System.out.println(formattedY1);
-        //System.out.println(formattedX2);
-        //System.out.println(formattedY2);
         return "LINE " + formattedX1 + " " + formattedY1 + " " + formattedX2 + " " + formattedY2;
     }
 }
