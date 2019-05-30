@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Handles redrawing vectors onto panels from an ArrayList of commands
+ */
 public class RedrawVectors {
     private ArrayList<String> vectorArray;
     private ArrayList<Double> VectorCords = new ArrayList<>();
@@ -12,12 +15,19 @@ public class RedrawVectors {
     private Color currentColour = Color.black;
     private String fillColour = "";
 
-
+    /**
+     * Initialises a RedrawVectors object
+     * @param vectorArray array to redraw
+     * @param drawingPanel panel to redraw onto
+     */
     public RedrawVectors(ArrayList<String> vectorArray, JPanel drawingPanel) {
         this.vectorArray = vectorArray;
         this.drawingPanel = drawingPanel;
     }
 
+    /**
+     * Redraws array onto panel
+     */
     public void redraw() {
 
         int panelHeight = drawingPanel.getSize().height;
