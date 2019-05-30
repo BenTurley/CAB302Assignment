@@ -490,7 +490,7 @@ public class GUI extends JFrame {
 
                 if(choice == JFileChooser.APPROVE_OPTION) {
                     System.out.println(fileChooser.getSelectedFile().getAbsolutePath());
-                    FileReaderWriter saveFile = new FileReaderWriter(fileChooser.getSelectedFile().getAbsolutePath(), "");
+                    FileReaderWriter saveFile = new FileReaderWriter(fileChooser.getSelectedFile().getAbsolutePath());
 
                     //Generate file contents
                     String saveFileContents = "";
@@ -520,7 +520,7 @@ public class GUI extends JFrame {
                     System.out.println("Opened: " + fileChooser.getSelectedFile().getAbsolutePath());
 
                     drawnShapes.clear();
-                    FileReaderWriter openedFile = new FileReaderWriter(fileChooser.getSelectedFile().getAbsolutePath(), "");
+                    FileReaderWriter openedFile = new FileReaderWriter(fileChooser.getSelectedFile().getAbsolutePath());
                     ArrayList fileContents = openedFile.ReadFile();
                     drawnShapes = fileContents;
                     System.out.println(fileContents);

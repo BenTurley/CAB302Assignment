@@ -4,9 +4,9 @@ import java.util.ArrayList;
 public class FileReaderWriter {
     private String actualFilePath;
     private String fileContent;
-    public FileReaderWriter(String directory, String fileName){
+    public FileReaderWriter(String directory){
 
-        this.actualFilePath = directory + File.separator + fileName;
+        this.actualFilePath = directory + File.separator;
 
     }
 
@@ -59,17 +59,20 @@ public class FileReaderWriter {
         return output;
     }
 
+    /*
     public static void main(String[] args) {
         //Writer test
-        FileReaderWriter test = new FileReaderWriter((System.getProperty("user.home")), "test.txt");
+        FileReaderWriter test = new FileReaderWriter((System.getProperty("user.home")));
         test.WriteFile("This is a test string");
         test.PrintOutputLocation();
         test.PrintOutputString();
         System.out.println("---");
         //Reader test
-        FileReaderWriter test2 = new FileReaderWriter((System.getProperty("user.home")), "test.txt");
+        FileReaderWriter test2 = new FileReaderWriter((System.getProperty("user.home")));
         test2.ReadFile();
     }
+
+     */
 }
 
 
