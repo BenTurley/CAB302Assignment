@@ -16,11 +16,11 @@ public class LineVector implements Vector {
 
     /**
      * Initialises LineVector
-     * @param x1
-     * @param y1
-     * @param x2
-     * @param y2
-     * @param panel
+     * @param x1    x1 coordinate for line
+     * @param y1    y1 coordinate for line
+     * @param x2    x2 coordinate for line
+     * @param y2    y2 coordinate for line
+     * @param panel panel to draw line onto
      */
     public LineVector(double x1, double y1, double x2, double y2, JPanel panel){
         this.x1 = x1;
@@ -32,7 +32,7 @@ public class LineVector implements Vector {
 
     /**
      * Sets LineVector colour
-     * @param colour
+     * @param colour colour to set line
      */
     public void SetColour(Color colour) {
         this.localColour = colour;
