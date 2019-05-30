@@ -244,10 +244,11 @@ public class GUI extends JFrame {
                 //historyMenu.add(new JLabel("y: "));
                 //For loop over drawnShapes array, adding a label for each item
 
-                historyMenu.setLayout(new GridLayout(0,1));
+                historyMenu.setLayout(new GridLayout(0,2));
                 for(int x=0; x < drawnShapes.size(); x++) {
                     historyMenu.add(new JLabel(drawnShapes.get(x) + "\n"));
                     //Add button next to each label to preview and revert to that location
+                    historyMenu.add(new JButton("" + x));
                 }
                 int result = JOptionPane.showConfirmDialog(drawingPanel, historyMenu, "History", JOptionPane.OK_CANCEL_OPTION);
                 /*
