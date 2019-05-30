@@ -29,19 +29,19 @@ public class RedrawVectors {
         String baseRegex = "(LINE|RECTANGLE|PLOT|ELLIPSE|FILL|PEN|POLYGON) ([0-9. ]+|#[A-FO0-9]+|OFF)";
         Pattern basePattern = Pattern.compile(baseRegex);
         for(int x = 0; x < vectorArray.size(); x++) {
-            System.out.println("Iteration: " + x);
+            //System.out.println("Iteration: " + x);
             String str = vectorArray.get(x).toString();
             Matcher matcher = basePattern.matcher(str);
             if(matcher.find()) {
-                System.out.println("Match 1: " + matcher.group(1));
-                System.out.println("Match 2: " + matcher.group(2));
+                //System.out.println("Match 1: " + matcher.group(1));
+                //System.out.println("Match 2: " + matcher.group(2));
 
                 String[] split = matcher.group(2).split(" ");
                 //System.out.println("The split array x1 is: " + split[0]);
                 //System.out.println("The split array y1 is: " + split[1]);
 
                 String type = matcher.group(1);
-                System.out.println("Assigned type as: " + type);
+                //System.out.println("Assigned type as: " + type);
                 /*
                 if(!matcher.group(1).equals("PLOT")) {
                     System.out.println("Found not plot!");
@@ -90,8 +90,8 @@ public class RedrawVectors {
                     VectorScale polygonScale = new VectorScale(Double.valueOf(split[0]), Double.valueOf(split[1]), Double.valueOf(split[2]), Double.valueOf(split[3]), drawingPanel);
                     PolygonVector polygon = new PolygonVector(drawingPanel);
                     polygon.PolygonInitialise(polygonScale.customScaleX(Double.valueOf(split[0])), polygonScale.customScaleY(Double.valueOf(split[1])));
-                    System.out.println("Redraw polygon found: " + matcher.group(2));
-                    System.out.println("Redraw polygon found this many points: " + split.length);
+                    //System.out.println("Redraw polygon found: " + matcher.group(2));
+                    //System.out.println("Redraw polygon found this many points: " + split.length);
                     for(int i = 0; i < ((split.length-2) / 2); i++) {
                         //polygon.AddSide(Double.valueOf(split[(2+i)]),Double.valueOf(split[(3+i)]));
                         polygon.AddSide(polygonScale.customScaleX(Double.valueOf(split[(2+(2*i))])),polygonScale.customScaleY(Double.valueOf(split[(3+(2*i))])));
@@ -118,17 +118,17 @@ public class RedrawVectors {
                 }
                 else if(matcher.group(1).equals("PEN")) {
                     penColour = split[0];
-                    System.out.println("String penColour is: " + penColour);
+                    //System.out.println("String penColour is: " + penColour);
                     this.currentColour = Color.decode(penColour);
                 }
                 else if(matcher.group(1).equals("FILL")) {
                     this.fillColour = split[0];
-                    System.out.println(fillColour);
+                    //System.out.println(fillColour);
                     if(fillColour.equals("OFF")) {
                         System.out.println("Set fillColour to \"\"");
                         this.fillColour = "";
                     }
-                    System.out.println("FILL: " + split[0]);
+                    //System.out.println("FILL: " + split[0]);
                 }
 
             }

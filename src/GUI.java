@@ -21,6 +21,7 @@ public class GUI extends JFrame {
     private String colour = "";
 
     public ArrayList<String> drawnShapes = new ArrayList<>();
+    public ArrayList<String> historyShapes = new ArrayList<>();
 
     public GUI() {
         super("Vector Editing Software");
@@ -194,14 +195,34 @@ public class GUI extends JFrame {
         }
     }
 
+    public class HistoryButtonListener implements ActionListener {
+
+        public void actionPerformed(ActionEvent f) {
+            String buttonString = f.getActionCommand();
+
+            System.out.println(buttonString);
+            //ArrayList historyShapes = new ArrayList(drawnShapes);
+            historyShapes = new ArrayList(drawnShapes);
+            System.out.println(historyShapes);
+            System.out.println(historyShapes.size());
+            for (int i = drawnShapes.size()-1; Integer.parseInt(buttonString) < i; i--) {
+                historyShapes.remove(i);
+            }
+            System.out.println(historyShapes);
+            RedrawVectors redrawPanel = new RedrawVectors(historyShapes, drawingPanel);
+            redrawPanel.redraw();
+
+
+
+        }
+    }
+
     public class ButtonListener implements MouseListener, ActionListener {
         private double x1;
         private double y1;
         private double x2;
         private double y2;
         private PolygonVector polygon = new PolygonVector(drawingPanel);
-
-//        boolean polygonInit = false;
 
 
 
@@ -239,24 +260,39 @@ public class GUI extends JFrame {
             }
             else if(buttonString.equals("History")) {
                 JPanel historyMenu = new JPanel();
-                //historyMenu.add(new JLabel("x: "));
-                //optionMenu.add(Box.createHorizontalStrut(15));
-                //historyMenu.add(new JLabel("y: "));
-                //For loop over drawnShapes array, adding a label for each item
-
+                JLabel infoLabel = new JLabel("Select to view drawing up until command");
+                JLabel blankLabel = new JLabel("");
+                historyMenu.add(infoLabel);
+                historyMenu.add(blankLabel);
                 historyMenu.setLayout(new GridLayout(0,2));
-                for(int x=0; x < drawnShapes.size(); x++) {
-                    historyMenu.add(new JLabel(drawnShapes.get(x) + "\n"));
+                for(int x = 0; x < drawnShapes.size(); x++) {
+
+                    historyMenu.add(new JLabel(drawnShapes.get(x)));
                     //Add button next to each label to preview and revert to that location
-                    historyMenu.add(new JButton("" + x));
+                    //JButton previewButton = new JButton("Preview");
+                    //previewButton.addActionListener(new HistoryButtonListener());
+                    //historyMenu.add(previewButton);
+                    JButton confirmButton = new JButton(Integer.toString(x));
+                    confirmButton.addActionListener(new HistoryButtonListener());
+                    historyMenu.add(confirmButton);
+
                 }
                 int result = JOptionPane.showConfirmDialog(drawingPanel, historyMenu, "History", JOptionPane.OK_CANCEL_OPTION);
-                /*
-                if(result == JOptionPane.OK_OPTION) {
 
+
+                if(result == JOptionPane.OK_OPTION) {
+                    //Change drawnShapes
+                    drawnShapes = new ArrayList<>(historyShapes);
+
+                    RedrawVectors redrawPanel = new RedrawVectors(drawnShapes, drawingPanel);
+                    redrawPanel.redraw();
+                }
+                else{
+                    RedrawVectors redrawPanel = new RedrawVectors(drawnShapes, drawingPanel);
+                    redrawPanel.redraw();
                 }
 
-                 */
+
             }
             //Fill
             else if(buttonString.equals("None")) {
@@ -392,7 +428,7 @@ public class GUI extends JFrame {
             if(tool == "Rectangle") {
                 /* Vector */
                 Vector rectangle = new RectangleVector(this.x1, this.y1, this.x2, this.y2, drawingPanel);
-                System.out.println("mouseReleased colour is: " + colour);
+                //System.out.println("mouseReleased colour is: " + colour);
                 //if(colour != ""){
                 if(!colour.equals("")) {
                     ((RectangleVector) rectangle).FillVector(colour);
