@@ -15,6 +15,9 @@ import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Class constructing GUI
+ */
 public class GUI extends JFrame {
     private JPanel drawingPanel;
     private String tool;
@@ -23,6 +26,9 @@ public class GUI extends JFrame {
     public ArrayList<String> drawnShapes = new ArrayList<>();
     public ArrayList<String> historyShapes = new ArrayList<>();
 
+    /**
+     * Initialises GUI
+     */
     public GUI() {
         super("Vector Editing Software");
 
@@ -151,11 +157,17 @@ public class GUI extends JFrame {
 
     }
 
+    /**
+     * main
+     * @param args
+     */
     public static void main(String[] args) {
         new GUI();
     }
 
-
+    /**
+     * Button listener for pen menu items
+     */
     public class PenButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent f) {
             String buttonString = f.getActionCommand();
@@ -195,6 +207,9 @@ public class GUI extends JFrame {
         }
     }
 
+    /**
+     * Button listener for history menu items
+     */
     public class HistoryButtonListener implements ActionListener {
 
         public void actionPerformed(ActionEvent f) {
@@ -217,6 +232,9 @@ public class GUI extends JFrame {
         }
     }
 
+    /**
+     * ButtonListener changing the currently selected tool and handling mouse actions
+     */
     public class ButtonListener implements MouseListener, ActionListener {
         private double x1;
         private double y1;
@@ -225,7 +243,10 @@ public class GUI extends JFrame {
         private PolygonVector polygon = new PolygonVector(drawingPanel);
 
 
-
+        /**
+         * Changes tool depending on button clicked
+         * @param f ActionEvent detected
+         */
         public void actionPerformed(ActionEvent f){
             String buttonString = f.getActionCommand();
 
@@ -369,6 +390,10 @@ public class GUI extends JFrame {
             }
         }
 
+        /**
+         * Handles mouseClicked actions depending on current tool
+         * @param e MouseEvent detected
+         */
         public void mouseClicked(MouseEvent e) {
             //Do nothing
 
@@ -412,6 +437,10 @@ public class GUI extends JFrame {
             }
         }
 
+        /**
+         * Handles mousePressed actions depending on current tool
+         * @param e MouseEvent detected
+         */
         public void mousePressed(MouseEvent e) {
             this.x1 = (e.getX());
             this.y1 = (e.getY());
@@ -424,6 +453,10 @@ public class GUI extends JFrame {
             }
         }
 
+        /**
+         * Handles mouseReleased actions depending on current tool
+         * @param e
+         */
         public void mouseReleased(MouseEvent e) {
             this.x2 = (e.getX());
             this.y2 = (e.getY());
