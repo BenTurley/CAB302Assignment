@@ -238,7 +238,24 @@ public class GUI extends JFrame {
                 redrawPanel.redraw();
             }
             else if(buttonString.equals("History")) {
+                JPanel historyMenu = new JPanel();
+                //historyMenu.add(new JLabel("x: "));
+                //optionMenu.add(Box.createHorizontalStrut(15));
+                //historyMenu.add(new JLabel("y: "));
+                //For loop over drawnShapes array, adding a label for each item
 
+                historyMenu.setLayout(new GridLayout(0,1));
+                for(int x=0; x < drawnShapes.size(); x++) {
+                    historyMenu.add(new JLabel(drawnShapes.get(x) + "\n"));
+                    //Add button next to each label to preview and revert to that location
+                }
+                int result = JOptionPane.showConfirmDialog(drawingPanel, historyMenu, "History", JOptionPane.OK_CANCEL_OPTION);
+                /*
+                if(result == JOptionPane.OK_OPTION) {
+
+                }
+
+                 */
             }
             //Fill
             else if(buttonString.equals("None")) {
