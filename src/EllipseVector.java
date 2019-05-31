@@ -16,6 +16,31 @@ public class EllipseVector implements Vector{
         this.x2 = x2;
         this.y2 = y2;
         this.panel = panel;
+        boundsLimiter();
+    }
+
+    private void boundsLimiter(){
+        double panelHeight = panel.getSize().height;
+        double panelWidth = panel.getSize().width;
+
+        double convertedX1 = (x1/panelWidth);
+        double convertedY1 = (y1/panelHeight);
+        double convertedX2 = (x2/panelWidth);
+        double convertedY2 = (y2/panelHeight);
+
+
+        if(convertedX1 < 0){
+            x1 = 0;
+        }
+        if(convertedY1 < 0){
+            y1 = 0;
+        }
+        if(convertedX2 < 0){
+            x2 = 0;
+        }
+        if(convertedY2 < 0){
+            y2 = 0;
+        }
     }
 
     private void xSwap(){
