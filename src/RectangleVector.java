@@ -16,6 +16,8 @@ public class RectangleVector implements Vector {
         this.x2 = x2;
         this.y2 = y2;
         this.panel = panel;
+
+        boundsLimiter();
     }
 
     /**
@@ -40,8 +42,11 @@ public class RectangleVector implements Vector {
         this.localColour = colour;
     }
 
+
+
     @Override
     public void DrawVector() {
+//        widthTest();
         int xDiff = (int) Math.abs(x2-x1);
         int yDiff = (int) Math.abs(y2-y1);
 
@@ -88,6 +93,31 @@ public class RectangleVector implements Vector {
         //Draw outline
         g.setColor(localColour);
         g.drawRect((int) x1,(int)y1,xDiff,yDiff);
+    }
+
+    private void boundsLimiter(){
+        double panelHeight = panel.getSize().height;
+        double panelWidth = panel.getSize().width;
+
+        double convertedX1 = (x1/panelWidth);
+        double convertedY1 = (y1/panelHeight);
+        double convertedX2 = (x2/panelWidth);
+        double convertedY2 = (y2/panelHeight);
+
+
+        if(convertedX1 < 0){
+            x1 = 0;
+        }
+
+        if(convertedY1 < 0){
+            y1 = 0;
+        }
+        if(convertedX2 < 0){
+            x2 = 0;
+        }
+        if(convertedY2 < 0){
+            y2 = 0;
+        }
     }
 
 
