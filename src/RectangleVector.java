@@ -51,6 +51,7 @@ public class RectangleVector implements Vector {
 
     /**
      * Changes the outline colour of the Ellipse for when it's drawn
+     * @param colour    Colour of outline
      */
     public void SetColour(Color colour) {
         this.localColour = colour;
