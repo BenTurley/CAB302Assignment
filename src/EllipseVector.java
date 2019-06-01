@@ -10,6 +10,15 @@ public class EllipseVector implements Vector{
     private JPanel panel;
     private Color localColour;
 
+
+    /**
+     *Initializes Ellipse Vector from x and y coordinates and drawing panel
+     * @param x1
+     * @param y1
+     * @param x2
+     * @param y2
+     * @param panel
+     */
     public EllipseVector(double x1, double y1, double x2, double y2, JPanel panel){
         this.x1 = x1;
         this.y1 = y1;
@@ -19,6 +28,9 @@ public class EllipseVector implements Vector{
         boundsLimiter();
     }
 
+    /**
+     * Changes x or y coordinates that are initialized off the drawing panel to appearing on the edge of drawing panel
+     */
     private void boundsLimiter(){
         double panelHeight = panel.getSize().height;
         double panelWidth = panel.getSize().width;
@@ -43,6 +55,9 @@ public class EllipseVector implements Vector{
         }
     }
 
+    /**
+     * Swaps x1 and x2 when called
+     */
     private void xSwap(){
         int temp = (int) this.x2;
         this.x2 = this.x1;
@@ -58,11 +73,16 @@ public class EllipseVector implements Vector{
         this.y1 = temp;
     }
 
+    /**
+     * Changes the outline colour of the Ellipse for when it is drawn
+     */
     public void SetColour(Color colour) {
         this.localColour = colour;
     }
 
-
+    /**
+     * Draws the Ellipse
+     */
     public void DrawVector() {
         int xDiff = (int) Math.abs(x2-x1);
         int yDiff = (int) Math.abs(y2-y1);
@@ -84,6 +104,9 @@ public class EllipseVector implements Vector{
         g.drawOval((int) x1,(int)y1,xDiff,yDiff);
     }
 
+    /**
+     * Draws the Ellipse with colour fill
+     */
     public void FillVector(String colour) {
         int xDiff = (int) Math.abs(x2-x1);
         int yDiff = (int) Math.abs(y2-y1);
@@ -111,8 +134,10 @@ public class EllipseVector implements Vector{
         g.drawOval((int) x1,(int)y1,xDiff,yDiff);
     }
 
-
-    @Override
+    /**
+     * Formats the Ellipse's Vector coordinates in VEC language format
+     * @return String of formatted coordinates for Ellipse Vector
+     */
     public String VectorOutputFormatted() {
         /* Make a class to handle this*/
         double panelHeight = panel.getSize().height;
