@@ -78,6 +78,7 @@ public class EllipseVector implements Vector{
 
     /**
      * Changes the outline colour of the Ellipse for when it is drawn
+     * @param colour    Colour of outline
      */
     public void SetColour(Color colour) {
         this.localColour = colour;
