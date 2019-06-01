@@ -28,6 +28,7 @@ public class LineVector implements Vector {
         this.x2 = x2;
         this.y2 = y2;
         this.panel = panel;
+        BoundsLimiter();
     }
 
     /**
@@ -45,7 +46,6 @@ public class LineVector implements Vector {
         Graphics g = panel.getGraphics();
         g.setColor(localColour);
         g.drawLine((int) x1,(int)y1,(int)x2,(int)y2);
-        BoundsLimiter();
     }
 
     /**

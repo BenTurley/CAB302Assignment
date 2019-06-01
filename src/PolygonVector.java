@@ -110,6 +110,22 @@ public class PolygonVector implements Vector {
     }
 
     /**
+     * For unit testing only, adds an addition side to the polygon
+     * @param x2    x coordinate for additional point
+     * @param y2    y coordinate for additional point
+     */
+    public void TestAddSide(double x2, double y2){
+        //VectorScale line = new VectorScale(0, 0, x2, y2, panel);
+
+        xPoints.add(x2 / panel.getSize().width);
+        yPoints.add(y2 / panel.getSize().height);
+
+        double x1 = x2;
+        double y1 = y2;
+        totalPoints += 1;
+    }
+
+    /**
      * Returns true if the polygon has been initialed by polygon initialed
      * @return boolean  boolean value of if shape has been initialed
      */
