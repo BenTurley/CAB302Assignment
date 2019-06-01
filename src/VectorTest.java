@@ -12,6 +12,7 @@ class VectorTest {
     @BeforeEach
     public void Setup() {
         testPanel = new JPanel();
+        testPanel.setSize(100, 100);
         line = null;
 
     }
@@ -21,8 +22,8 @@ class VectorTest {
      */
     @Test
     public void TestLineOutput() {
-        line = new LineVector(0,0,1,1, testPanel);
-        assertEquals("LINE 0.00 0.00 1.00 1.00",line.VectorOutputFormatted());
+        line = new LineVector(0,0,50,50, testPanel);
+        assertEquals("LINE 0.00 0.00 0.50 0.50",line.VectorOutputFormatted());
 
     }
 }
