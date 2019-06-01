@@ -35,18 +35,17 @@ public class GUI extends JFrame {
 
         //Background panel
         backgroundPanel = new JPanel();
-
-
         this.add(backgroundPanel);
+
         //New drawing panel
         drawingPanel = new JPanel();
 
         //Set drawing panel colour
         drawingPanel.addMouseListener(new ButtonListener());
+
         //Add component listener
         drawingPanel.addComponentListener(new ComponentListener());
         this.add(drawingPanel);
-        //backgroundPanel.add(drawingPanel);
 
         //Create menu bar
         JMenuBar menuBar = new JMenuBar();
@@ -130,8 +129,6 @@ public class GUI extends JFrame {
         //Add pen colour menu to menu bar
         menuBar.add(penColourMenu);
 
-        //Create pen input for hex values
-
         //Create fill colour menu
         JMenu fillColourMenu = new JMenu("Fill");
         //Create fill colour menu items
@@ -152,8 +149,6 @@ public class GUI extends JFrame {
         //Add fill colour menu to menu bar
         menuBar.add(fillColourMenu);
 
-
-
         this.setJMenuBar(menuBar);
 
         //Display window
@@ -172,14 +167,20 @@ public class GUI extends JFrame {
         new GUI();
     }
 
+    /**
+     * Component listener to handle drawingPanel
+     */
     public class ComponentListener implements java.awt.event.ComponentListener {
+        /**
+         *  Sets component to 1 to 1 aspect ratio (square shape) when resized
+         * @param e Component detected by listener
+         */
         @Override
         public void componentResized(ComponentEvent e) {
             int newWidth = e.getComponent().getWidth();
             int newHeight = e.getComponent().getHeight();
             int minimumDimension = Math.min(newWidth, newHeight);
-            System.out.println("Width: " + newWidth);
-            System.out.println("Height: " + newHeight);
+            //Set size to be square
             e.getComponent().setSize(new Dimension(minimumDimension, minimumDimension));
             //Redraw panel
             RedrawVectors redrawPanel = new RedrawVectors(drawnShapes, drawingPanel);
@@ -253,7 +254,6 @@ public class GUI extends JFrame {
             String buttonString = f.getActionCommand();
 
             System.out.println(buttonString);
-            //ArrayList historyShapes = new ArrayList(drawnShapes);
             historyShapes = new ArrayList(drawnShapes);
             System.out.println(historyShapes);
             System.out.println(historyShapes.size());
@@ -263,8 +263,6 @@ public class GUI extends JFrame {
             System.out.println(historyShapes);
             RedrawVectors redrawPanel = new RedrawVectors(historyShapes, drawingPanel);
             redrawPanel.redraw();
-
-
 
         }
     }
@@ -329,10 +327,6 @@ public class GUI extends JFrame {
                 for(int x = 0; x < drawnShapes.size(); x++) {
 
                     historyMenu.add(new JLabel(drawnShapes.get(x)));
-                    //Add button next to each label to preview and revert to that location
-                    //JButton previewButton = new JButton("Preview");
-                    //previewButton.addActionListener(new HistoryButtonListener());
-                    //historyMenu.add(previewButton);
                     JButton confirmButton = new JButton(Integer.toString(x));
                     confirmButton.addActionListener(new HistoryButtonListener());
                     historyMenu.add(confirmButton);
@@ -398,7 +392,6 @@ public class GUI extends JFrame {
                 JPanel optionMenu = new JPanel();
                 optionMenu.add(new JLabel("x: "));
                 optionMenu.add(xInput);
-                //optionMenu.add(Box.createHorizontalStrut(15));
                 optionMenu.add(new JLabel("y: "));
                 optionMenu.add(yInput);
                 int result = JOptionPane.showConfirmDialog(drawingPanel, optionMenu, "Enter X and Y dimensions for BMP", JOptionPane.OK_CANCEL_OPTION);
@@ -465,7 +458,6 @@ public class GUI extends JFrame {
                     catch (Exception f){
                         JOptionPane.showMessageDialog(drawingPanel, "Invalid amount of polygon sides");
                         this.polygon = new PolygonVector(drawingPanel);
-                        //System.out.println("Error");
                         System.out.println(f.getMessage());
                     }
 
@@ -501,8 +493,7 @@ public class GUI extends JFrame {
             if(tool == "Rectangle") {
                 /* Vector */
                 Vector rectangle = new RectangleVector(this.x1, this.y1, this.x2, this.y2, drawingPanel);
-                //System.out.println("mouseReleased colour is: " + colour);
-                //if(colour != ""){
+
                 if(!colour.equals("")) {
                     ((RectangleVector) rectangle).FillVector(colour);
                 }
@@ -576,9 +567,6 @@ public class GUI extends JFrame {
                     }
                     System.out.println(saveFileContents);
 
-
-
-
                     //Write to file
                     saveFile.WriteFile(saveFileContents);
                 }
@@ -599,6 +587,7 @@ public class GUI extends JFrame {
                 if(choice == JFileChooser.APPROVE_OPTION) {
                     System.out.println("Opened: " + fileChooser.getSelectedFile().getAbsolutePath());
 
+                    //Clear existing drawnShapes array
                     drawnShapes.clear();
                     FileReaderWriter openedFile = new FileReaderWriter(fileChooser.getSelectedFile().getAbsolutePath());
                     ArrayList fileContents = openedFile.ReadFile();
@@ -607,62 +596,6 @@ public class GUI extends JFrame {
                     RedrawVectors drawPanel = new RedrawVectors(fileContents, drawingPanel);
                     drawPanel.redraw();
 
-
-                    /*
-                    //#Regular expressions
-                    String regex = "(LINE |RECTANGLE )([0-9.]+) ([0-9.]+) ([0-9.]+) ([0-9.]+)";
-                    Pattern pattern = Pattern.compile(regex);
-                    //#
-
-                    //!NOTE: This is poorly written, rewrite once FileReaderWriter has been restructured
-                    FileReaderWriter openedFile = new FileReaderWriter(fileChooser.getSelectedFile().getAbsolutePath(), "");
-                    ArrayList fileContents = openedFile.ReadFile();
-                    System.out.println(fileContents);
-                    for(int x = 0; x < fileContents.size(); x++ ){
-                        String str = fileContents.get(x).toString();
-                        System.out.println(str);
-                        //#Regular expressions
-                        Matcher matcher = pattern.matcher(str);
-                        if(matcher.find()) {
-                            //System.out.println("Type: " + matcher.group(1));
-                            //System.out.println(matcher.group(1));
-                            //System.out.println("x1: " + matcher.group(2));
-                            double outx1 = Double.valueOf(matcher.group(2));
-                            //System.out.println(outx1);
-                            //System.out.println("y1: " + matcher.group(3));
-                            double outy1 = Double.valueOf(matcher.group(3));
-                            //System.out.println(outy1);
-                            //System.out.println("x2: " + matcher.group(4));
-                            double outx2 = Double.valueOf(matcher.group(4));
-                            //System.out.println(outx2);
-                            //System.out.println("y2: " + matcher.group(5));
-                            double outy2 = Double.valueOf(matcher.group(5));
-                            //System.out.println(outy2);
-
-                            //If LINE
-                            if(matcher.group(1).equals("LINE ")) {
-                                System.out.println("Detected LINE");
-                                VectorScale lineScale = new VectorScale(outx1, outy1, outx2, outy2, drawingPanel);
-                                Vector fileLine = new LineVector(lineScale.x1(), lineScale.y1(), lineScale.x2(), lineScale.y2(), drawingPanel);
-                                fileLine.DrawVector();
-                                System.out.println(fileLine.VectorOutputFormatted());
-                                System.out.println(fileLine);
-                                drawnShapes.add(fileLine.VectorOutputFormatted());
-                            }
-
-                            //Else if RECTANGLE
-                            else if(matcher.group(1).equals("RECTANGLE ")) {
-                                System.out.println("Detected RECTANGLE");
-                                VectorScale rectangleScale = new VectorScale(outx1, outy1, outx2, outy2, drawingPanel);
-                                RectangleVector fileRectangle = new RectangleVector(rectangleScale.x1(), rectangleScale.y1(), rectangleScale.x2(), rectangleScale.y2(), drawingPanel);
-                                fileRectangle.DrawVector();
-                                System.out.println(fileRectangle.VectorOutputFormatted());
-                                System.out.println(fileRectangle);
-                                drawnShapes.add(fileRectangle.VectorOutputFormatted());
-                            }
-                        }
-                    }
-                     */
                 }
                 else {
                     //Set display label to say user cancelled
