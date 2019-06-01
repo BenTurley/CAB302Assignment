@@ -562,12 +562,22 @@ public class GUI extends JFrame {
                     System.out.println(fileChooser.getSelectedFile().getAbsolutePath());
                     FileReaderWriter saveFile = new FileReaderWriter(fileChooser.getSelectedFile().getAbsolutePath());
 
+                    //Add file extension if not added by user
+                    String checkFilename = fileChooser.getSelectedFile().toString();
+                    if(!checkFilename.endsWith(".vec")) {
+                        System.out.println("File name doesn't end with .vec");
+                        saveFile = new FileReaderWriter(fileChooser.getSelectedFile().getAbsolutePath() + ".vec");
+                    }
+
                     //Generate file contents
                     String saveFileContents = "";
                     for(int x = 0; x < drawnShapes.size(); x++) {
                         saveFileContents += drawnShapes.get(x) + "\n";
                     }
                     System.out.println(saveFileContents);
+
+
+
 
                     //Write to file
                     saveFile.WriteFile(saveFileContents);
