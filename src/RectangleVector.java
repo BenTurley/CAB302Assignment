@@ -84,6 +84,7 @@ public class RectangleVector implements Vector {
 
     /**
      * Draws the Rectangle with colour fill
+     * @param colour    Colour of outline
      */
     public void FillVector(String colour) {
         int xDiff = (int) Math.abs(x2-x1);
