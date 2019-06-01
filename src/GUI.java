@@ -22,13 +22,13 @@ public class GUI extends JFrame {
     private String tool;
     private String colour = "";
 
-    public ArrayList<String> drawnShapes = new ArrayList<>();
-    public ArrayList<String> historyShapes = new ArrayList<>();
+    private ArrayList<String> drawnShapes = new ArrayList<>();
+    private ArrayList<String> historyShapes = new ArrayList<>();
 
     /**
      * Initialises GUI
      */
-    public GUI() {
+    private GUI() {
         super("Vector Editing Software");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -161,7 +161,7 @@ public class GUI extends JFrame {
 
     /**
      * main
-     * @param args
+     * @param args args
      */
     public static void main(String[] args) {
         new GUI();
@@ -427,9 +427,9 @@ public class GUI extends JFrame {
         public void mouseClicked(MouseEvent e) {
             //Do nothing
 
-            if(tool == "Polygon"){
+            if(tool.equals("Polygon")){
                 if(e.getButton() == MouseEvent.BUTTON1){
-                    if(polygon.PolygonInitialised() == false){
+                    if(!polygon.PolygonInitialised()){
                         this.x1 = (e.getX());
                         this.y1 = (e.getY());
                         polygon.PolygonInitialise(x1, y1);
@@ -442,7 +442,7 @@ public class GUI extends JFrame {
                 }
                 else if(e.getButton() == MouseEvent.BUTTON3){
                     try{
-                        if(polygon.ValidSides() == false){
+                        if(!polygon.ValidSides()){
                             throw new Exception("Sides must be greater than 2");
                         }
                         if(!colour.equals("")) {
@@ -473,7 +473,7 @@ public class GUI extends JFrame {
         public void mousePressed(MouseEvent e) {
             this.x1 = (e.getX());
             this.y1 = (e.getY());
-            if(tool == "Plot") {
+            if(tool.equals("Plot")) {
                 PlotVector plot = new PlotVector(this.x1, this.y1, drawingPanel);
                 plot.DrawVector();
                 drawnShapes.add(plot.VectorOutputFormatted());
@@ -484,13 +484,13 @@ public class GUI extends JFrame {
 
         /**
          * Handles mouseReleased actions depending on current tool
-         * @param e
+         * @param e MouseEvent detected
          */
         public void mouseReleased(MouseEvent e) {
             this.x2 = (e.getX());
             this.y2 = (e.getY());
 
-            if(tool == "Rectangle") {
+            if(tool.equals("Rectangle")) {
                 /* Vector */
                 Vector rectangle = new RectangleVector(this.x1, this.y1, this.x2, this.y2, drawingPanel);
 
@@ -503,13 +503,13 @@ public class GUI extends JFrame {
                 drawnShapes.add(rectangle.VectorOutputFormatted());
                 System.out.println(drawnShapes);
             }
-            else if(tool == "Line"){
+            else if(tool.equals("Line")){
                 Vector line  = new LineVector(this.x1, this.y1, this.x2, this.y2, drawingPanel);
                 line.DrawVector();
                 drawnShapes.add(line.VectorOutputFormatted());
                 System.out.println(drawnShapes);
             }
-            else if(tool == "Ellipse"){
+            else if(tool.equals("Ellipse")){
                 Vector Ellipse  = new EllipseVector(this.x1, this.y1, this.x2, this.y2, drawingPanel);
 
                 Ellipse.DrawVector();
@@ -565,13 +565,10 @@ public class GUI extends JFrame {
                     for(int x = 0; x < drawnShapes.size(); x++) {
                         saveFileContents += drawnShapes.get(x) + "\n";
                     }
-                    System.out.println(saveFileContents);
+                    //System.out.println(saveFileContents);
 
                     //Write to file
                     saveFile.WriteFile(saveFileContents);
-                }
-                else {
-                    //Set display label to say user cancelled
                 }
             }
             else {
@@ -585,20 +582,17 @@ public class GUI extends JFrame {
                 int choice = fileChooser.showOpenDialog(null);
 
                 if(choice == JFileChooser.APPROVE_OPTION) {
-                    System.out.println("Opened: " + fileChooser.getSelectedFile().getAbsolutePath());
+                    //System.out.println("Opened: " + fileChooser.getSelectedFile().getAbsolutePath());
 
                     //Clear existing drawnShapes array
                     drawnShapes.clear();
                     FileReaderWriter openedFile = new FileReaderWriter(fileChooser.getSelectedFile().getAbsolutePath());
                     ArrayList fileContents = openedFile.ReadFile();
                     drawnShapes = fileContents;
-                    System.out.println(fileContents);
+                    JOptionPane.showMessageDialog(drawingPanel, "Loaded " + fileChooser.getSelectedFile());
                     RedrawVectors drawPanel = new RedrawVectors(fileContents, drawingPanel);
                     drawPanel.redraw();
 
-                }
-                else {
-                    //Set display label to say user cancelled
                 }
             }
         }

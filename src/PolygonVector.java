@@ -77,9 +77,9 @@ public class PolygonVector implements Vector {
         xPoints[totalPoints] = (int) (this.xPoints.get(0) * panel.getSize().width);
         yPoints[totalPoints] = (int) (this.yPoints.get(0) * panel.getSize().height);
 
-        System.out.println(this.xPoints);
-        System.out.println(this.yPoints);
-        System.out.println(totalPoints);
+        //System.out.println(this.xPoints);
+        //System.out.println(this.yPoints);
+        //System.out.println(totalPoints);
 
         Polygon poly = new Polygon(xPoints, yPoints, totalPoints);
 
