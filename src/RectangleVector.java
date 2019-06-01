@@ -2,6 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.text.DecimalFormat;
 
+/**
+ * Handles initialization and drawing RectangleVector on panels
+ */
 public class RectangleVector implements Vector {
     private double x1;
     private double y1;
@@ -10,6 +13,14 @@ public class RectangleVector implements Vector {
     private JPanel panel;
     private Color localColour;
 
+    /**
+     * Initializes RectangleVectors from x and y coordinates and drawing panel
+     * @param x1
+     * @param y1
+     * @param x2
+     * @param y2
+     * @param panel
+     */
     public RectangleVector(double x1, double y1, double x2, double y2, JPanel panel){
         this.x1 = x1;
         this.y1 = y1;
@@ -38,13 +49,16 @@ public class RectangleVector implements Vector {
         this.y1 = temp;
     }
 
+    /**
+     * Changes the outline colour of the Ellipse for when it's drawn
+     */
     public void SetColour(Color colour) {
         this.localColour = colour;
     }
 
-
-
-    @Override
+    /**
+     * Draws the Rectangle
+     */
     public void DrawVector() {
 //        widthTest();
         int xDiff = (int) Math.abs(x2-x1);
@@ -68,7 +82,9 @@ public class RectangleVector implements Vector {
         g.drawRect((int) x1,(int)y1,xDiff,yDiff);
     }
 
-    
+    /**
+     * Draws the Rectangle with colour fill
+     */
     public void FillVector(String colour) {
         int xDiff = (int) Math.abs(x2-x1);
         int yDiff = (int) Math.abs(y2-y1);
@@ -95,6 +111,9 @@ public class RectangleVector implements Vector {
         g.drawRect((int) x1,(int)y1,xDiff,yDiff);
     }
 
+    /**
+     * Changes x or y coordinates if they are initialized off the drawing panel to appearing on the edge of drawing panel
+     */
     private void boundsLimiter(){
         double panelHeight = panel.getSize().height;
         double panelWidth = panel.getSize().width;
@@ -121,7 +140,10 @@ public class RectangleVector implements Vector {
     }
 
 
-    @Override
+    /**
+     * Formats the Rectangles's Vector coordinates in VEC language format
+     * @return String of formatted coordinates of Rectangle Vector
+     */
     public String VectorOutputFormatted() {
         /* Make a class to handle this*/
         double panelHeight = panel.getSize().height;
