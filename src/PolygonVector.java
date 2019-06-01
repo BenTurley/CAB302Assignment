@@ -3,6 +3,9 @@ import java.awt.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+/**
+ * Handles initialization, creation and drawing RectangleVector onto panels
+ */
 public class PolygonVector implements Vector {
     private boolean initialed = false;
     private int totalPoints = 0;
@@ -11,12 +14,19 @@ public class PolygonVector implements Vector {
     private JPanel panel;
     private Color localColour;
 
-
+    /**
+     * Initializes RectangleVectors onto selected drawing panel
+     * @param panel
+     */
     public PolygonVector( JPanel panel){
         this.panel = panel;
     }
 
-
+    /**
+     * Used to select the first point of the polygon
+     * @param x1 x coordinate for first point
+     * @param y1 y coordinate for first point
+     */
     public void PolygonInitialise(double x1, double y1){
         xPoints.add(x1 / panel.getSize().width);
         yPoints.add(y1 / panel.getSize().height);
@@ -24,6 +34,10 @@ public class PolygonVector implements Vector {
         totalPoints = 1;
     }
 
+    /**
+     * Checks the amount of points on polygon then if the polygon has 3 or more total points it returns true else it returns false
+     * @return boolean value of if shape is valid
+     */
     public boolean ValidSides(){
         if(totalPoints < 3){
             return false;
@@ -33,6 +47,9 @@ public class PolygonVector implements Vector {
         }
     }
 
+    /**
+     * Redraws the polygon on panel when called within another public function
+     */
     private void Redraw(){
         for(int i = 1; i < this.xPoints.size() ; i++){
             int x1 = (int) (this.xPoints.get(i - 1) * panel.getSize().width);
@@ -44,7 +61,9 @@ public class PolygonVector implements Vector {
             line.DrawVector();
     }
 }
-
+    /**
+     * Draws the polygon with colour fill
+     */
     public void FillVector(String colour) {
         int[] xPoints = new int[totalPoints + 1];
         int[] yPoints = new int[totalPoints + 1];
@@ -73,6 +92,11 @@ public class PolygonVector implements Vector {
         g.drawPolygon(poly);
     }
 
+    /**
+     * Adds an addition side to the polygon and redraws it on panel
+     * @param x2    x coordinate for additional point
+     * @param y2    y coordinate for additional point
+     */
     public void AddSide(double x2, double y2){
         //VectorScale line = new VectorScale(0, 0, x2, y2, panel);
 
@@ -85,11 +109,19 @@ public class PolygonVector implements Vector {
         Redraw();
     }
 
+    /**
+     * Returns true if the polygon has been initialed by polygon initialed
+     * @return boolean  boolean value of if shape has been initialed
+     */
     public boolean PolygonInitialised(){
         return initialed;
     }
 
-    @Override
+
+    /**
+     * Changes the outline colour of the Polygon for when it's drawn
+     * @param colour    Colour of outline
+     */
     public void SetColour(Color colour) {
         this.localColour = colour;
     }
