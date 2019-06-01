@@ -28,13 +28,13 @@ public class EllipseVector implements Vector{
         this.x2 = x2;
         this.y2 = y2;
         this.panel = panel;
-        boundsLimiter();
+        BoundsLimiter();
     }
 
     /**
      * Changes x or y coordinates that are initialized off the drawing panel to appearing on the edge of drawing panel
      */
-    private void boundsLimiter(){
+    private void BoundsLimiter(){
         double panelHeight = panel.getSize().height;
         double panelWidth = panel.getSize().width;
 
