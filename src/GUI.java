@@ -3,10 +3,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -19,7 +16,9 @@ import java.util.regex.Pattern;
  * Class constructing GUI
  */
 public class GUI extends JFrame {
+    private JPanel backgroundPanel;
     private JPanel drawingPanel;
+
     private String tool;
     private String colour = "";
 
@@ -34,12 +33,20 @@ public class GUI extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        //Background panel
+        backgroundPanel = new JPanel();
+
+
+        this.add(backgroundPanel);
         //New drawing panel
         drawingPanel = new JPanel();
-        //drawingPanel.setBackground(Color.LIGHT_GRAY);
-        drawingPanel.addMouseListener(new ButtonListener());
-        this.add(drawingPanel);
 
+        //Set drawing panel colour
+        drawingPanel.addMouseListener(new ButtonListener());
+        //Add component listener
+        drawingPanel.addComponentListener(new ComponentListener());
+        this.add(drawingPanel);
+        //backgroundPanel.add(drawingPanel);
 
         //Create menu bar
         JMenuBar menuBar = new JMenuBar();
@@ -163,6 +170,36 @@ public class GUI extends JFrame {
      */
     public static void main(String[] args) {
         new GUI();
+    }
+
+    public class ComponentListener implements java.awt.event.ComponentListener {
+        @Override
+        public void componentResized(ComponentEvent e) {
+            int newWidth = e.getComponent().getWidth();
+            int newHeight = e.getComponent().getHeight();
+            int minimumDimension = Math.min(newWidth, newHeight);
+            System.out.println("Width: " + newWidth);
+            System.out.println("Height: " + newHeight);
+            e.getComponent().setSize(new Dimension(minimumDimension, minimumDimension));
+            //Redraw panel
+            RedrawVectors redrawPanel = new RedrawVectors(drawnShapes, drawingPanel);
+            redrawPanel.redraw();
+        }
+
+        @Override
+        public void componentMoved(ComponentEvent e) {
+
+        }
+
+        @Override
+        public void componentShown(ComponentEvent e) {
+
+        }
+
+        @Override
+        public void componentHidden(ComponentEvent e) {
+
+        }
     }
 
     /**

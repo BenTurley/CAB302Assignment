@@ -36,6 +36,11 @@ public class RedrawVectors {
         Graphics g = drawingPanel.getGraphics();
         g.clearRect(0,0,panelWidth,panelHeight);
 
+        //Set background colour
+        g.setColor(Color.LIGHT_GRAY);
+        g.fillRect(0,0, drawingPanel.getSize().width, drawingPanel.getSize().height);
+
+
         String baseRegex = "(LINE|RECTANGLE|PLOT|ELLIPSE|FILL|PEN|POLYGON) ([0-9. ]+|#[A-FO0-9]+|OFF)";
         Pattern basePattern = Pattern.compile(baseRegex);
         for(int x = 0; x < vectorArray.size(); x++) {
@@ -63,6 +68,7 @@ public class RedrawVectors {
                 if(matcher.group(1).equals("LINE")) {
                     VectorScale lineScale = new VectorScale(Double.valueOf(split[0]),Double.valueOf(split[1]), Double.valueOf(split[2]),Double.valueOf(split[3]), drawingPanel);
                     Vector line = new LineVector(lineScale.x1(), lineScale.y1(), lineScale.x2(), lineScale.y2(), drawingPanel);
+
                     line.SetColour(currentColour);
                     line.DrawVector();
                 }
@@ -140,6 +146,8 @@ public class RedrawVectors {
                     }
                     //System.out.println("FILL: " + split[0]);
                 }
+
+
 
             }
         }
