@@ -70,8 +70,14 @@ public class LineVector implements Vector {
         if(convertedX2 < 0){
             x2 = 0;
         }
+        else if(convertedX2 > 1){
+            x2 = panel.getSize().width;
+        }
         if(convertedY2 < 0){
             y2 = 0;
+        }
+        else if(convertedY2 > 1){
+            y2 = panel.getSize().height;
         }
     }
 
