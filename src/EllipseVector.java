@@ -16,11 +16,11 @@ public class EllipseVector implements Vector{
 
     /**
      *Initializes Ellipse Vector from x and y coordinates and drawing panel
-     * @param x1
-     * @param y1
-     * @param x2
-     * @param y2
-     * @param panel
+     * @param x1    x1 coordinate for Ellipse
+     * @param y1    y1 coordinate for Ellipse
+     * @param x2    x2 coordinate for Ellipse
+     * @param y2    y2 coordinate for Ellipse
+     * @param panel panel to draw Ellipse onto
      */
     public EllipseVector(double x1, double y1, double x2, double y2, JPanel panel){
         this.x1 = x1;
