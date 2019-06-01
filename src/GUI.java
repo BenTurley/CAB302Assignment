@@ -19,7 +19,7 @@ public class GUI extends JFrame {
     private JPanel backgroundPanel;
     private JPanel drawingPanel;
 
-    private String tool;
+    private String tool = "Line";
     private String colour = "";
 
     private ArrayList<String> drawnShapes = new ArrayList<>();
@@ -133,18 +133,18 @@ public class GUI extends JFrame {
         JMenu fillColourMenu = new JMenu("Fill");
         //Create fill colour menu items
         JMenuItem noFill = new JMenuItem("None");
-        JMenuItem gray = new JMenuItem("Gray");
         JMenuItem red = new JMenuItem("Red");
+        JMenuItem blue = new JMenuItem("Blue");
         JMenuItem customFill = new JMenuItem("Custom");
         //Add functionality to fill items
         noFill.addActionListener(new ButtonListener());
-        gray.addActionListener(new ButtonListener());
+        blue.addActionListener(new ButtonListener());
         red.addActionListener(new ButtonListener());
         customFill.addActionListener(new ButtonListener());
         //Add fill colour menu items to menu
         fillColourMenu.add(noFill);
-        fillColourMenu.add(gray);
         fillColourMenu.add(red);
+        fillColourMenu.add(blue);
         fillColourMenu.add(customFill);
         //Add fill colour menu to menu bar
         menuBar.add(fillColourMenu);
@@ -354,9 +354,9 @@ public class GUI extends JFrame {
                 drawnShapes.add("FILL OFF");
                 colour = "";
             }
-            else if(buttonString.equals("Gray")) {
-                drawnShapes.add("FILL #808080");
-                colour = "#808080";
+            else if(buttonString.equals("Blue")) {
+                drawnShapes.add("FILL #0000FF");
+                colour = "#0000FF";
             }
             else if(buttonString.equals("Red")) {
                 drawnShapes.add("FILL #FF0000");
