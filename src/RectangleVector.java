@@ -15,11 +15,11 @@ public class RectangleVector implements Vector {
 
     /**
      * Initializes RectangleVectors from x and y coordinates and drawing panel
-     * @param x1
-     * @param y1
-     * @param x2
-     * @param y2
-     * @param panel
+     * @param x1    x1 coordinate for Rectangle
+     * @param y1    y1 coordinate for Rectangle
+     * @param x2    x2 coordinate for Rectangle
+     * @param y2    y2 coordinate for Rectangle
+     * @param panel panel to draw Rectangle onto
      */
     public RectangleVector(double x1, double y1, double x2, double y2, JPanel panel){
         this.x1 = x1;
