@@ -75,7 +75,7 @@ class VectorTest {
     }
 
     /*
-    Test 6: Line Vector for when x and y input is off screen
+    Test 6: Line Vector for when x and y input is off left of screen
     */
     @Test
     public void TestLineBoundsLimit() {
@@ -84,7 +84,7 @@ class VectorTest {
     }
 
     /*
-    Test 7: Rectangle Vector for when x and y input is off screen
+    Test 7: Rectangle Vector for when x and y input is off left of screen
     */
     @Test
     public void TestRectangleBoundsLimit() {
@@ -93,12 +93,39 @@ class VectorTest {
     }
 
     /*
-    Test 8: Ellipse Vector for when x and y input is off screen
+    Test 8: Ellipse Vector for when x and y input is off left of screen
     */
     @Test
     public void TestEllipseBoundsLimit() {
         ellipse = new EllipseVector(50,50,-50,-50, testPanel);
         assertEquals("ELLIPSE 0.50 0.50 0.00 0.00",ellipse.VectorOutputFormatted());
+    }
+
+    /*
+    Test 9: Line Vector for when x and y input is off right of screen
+    */
+    @Test
+    public void TestLineBoundsLimitRight() {
+        line = new LineVector(10,10,120,150, testPanel);
+        assertEquals("LINE 0.10 0.10 1.00 1.00",line.VectorOutputFormatted());
+    }
+
+    /*
+    Test 10: Rectangle Vector for when x and y input is off right of screen
+    */
+    @Test
+    public void TestRectangleBoundsLimitRight() {
+        rectangle = new RectangleVector(50,50,150,150, testPanel);
+        assertEquals("RECTANGLE 0.50 0.50 1.00 1.00",rectangle.VectorOutputFormatted());
+    }
+
+    /*
+    Test 11: Ellipse Vector for when x and y input is off right of screen
+    */
+    @Test
+    public void TestEllipseBoundsLimitRight() {
+        ellipse = new EllipseVector(50,50,150,150, testPanel);
+        assertEquals("ELLIPSE 0.50 0.50 1.00 1.00",ellipse.VectorOutputFormatted());
     }
 
 
