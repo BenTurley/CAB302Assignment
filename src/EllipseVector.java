@@ -2,6 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.text.DecimalFormat;
 
+/**
+ * Handles initialization and drawing EllipseVectors on panels
+ */
 public class EllipseVector implements Vector{
     private double x1;
     private double y1;
