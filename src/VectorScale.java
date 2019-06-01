@@ -65,7 +65,7 @@ public class VectorScale {
 
     /**
      * Scales an inputted x coordinate
-     * @param x x value to scale
+     * @param x value to be scale
      * @return scaled x
      */
     public double customScaleX(double x) {
@@ -74,7 +74,7 @@ public class VectorScale {
 
     /**
      * Scales an inputted y coordinate
-     * @param y
+     * @param y value to be scale
      * @return scaled y
      */
     public double customScaleY(double y) {
