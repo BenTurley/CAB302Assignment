@@ -45,10 +45,13 @@ public class LineVector implements Vector {
         Graphics g = panel.getGraphics();
         g.setColor(localColour);
         g.drawLine((int) x1,(int)y1,(int)x2,(int)y2);
-        boundsLimiter();
+        BoundsLimiter();
     }
 
-    private void boundsLimiter(){
+    /**
+     * Changes x or y coordinates that are initialized off the drawing panel to appearing on the edge of drawing panel
+     */
+    private void BoundsLimiter(){
         double panelHeight = panel.getSize().height;
         double panelWidth = panel.getSize().width;
 
