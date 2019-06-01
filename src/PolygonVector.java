@@ -126,7 +126,9 @@ public class PolygonVector implements Vector {
         this.localColour = colour;
     }
 
-    @Override
+    /**
+     * Draws the polygon
+     */
     public void DrawVector() {
         int[] xPoints = new int[totalPoints + 1];
         int[] yPoints = new int[totalPoints + 1];
@@ -151,7 +153,10 @@ public class PolygonVector implements Vector {
         g.drawPolygon(poly);
     }
 
-    @Override
+    /**
+     * Formats the polygon's Vector coordinates in VEC language format
+     * @return String of formatted coordinates of polygon Vector
+     */
     public String VectorOutputFormatted() {
         DecimalFormat df = new DecimalFormat("0.00");
         String polygonString = "POLYGON";
