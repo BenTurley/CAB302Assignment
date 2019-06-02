@@ -102,10 +102,10 @@ public class RectangleVector implements Vector {
             ySwap();
             xSwap();
         }
-        System.out.println("FillVector set colour to: " + colour);
+        //System.out.println("FillVector set colour to: " + colour);
         Graphics g = panel.getGraphics();
         g.setColor(Color.decode(colour));
-        System.out.println("FillVector set colour to: " + colour);
+        //System.out.println("FillVector set colour to: " + colour);
 
         g.fillRect((int) x1,(int)y1,xDiff,yDiff);
         //Draw outline
