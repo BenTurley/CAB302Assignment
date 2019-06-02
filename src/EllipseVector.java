@@ -133,10 +133,8 @@ public class EllipseVector implements Vector{
             xSwap();
         }
 
-        System.out.println("FillVector set colour to: " + colour);
         Graphics g = panel.getGraphics();
         g.setColor(Color.decode(colour));
-        System.out.println("FillVector set colour to: " + colour);
 
         g.fillOval((int) x1,(int)y1,xDiff,yDiff);
         //Draw outline
